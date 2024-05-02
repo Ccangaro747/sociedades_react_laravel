@@ -40,6 +40,11 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
-        'password' => 'hashed',
     ];
+
+    //Relacion uno a muchos con la tabla entidad
+    public function entidads()
+    {
+        return $this->hasMany(Entidad::class);
+    }
 }
