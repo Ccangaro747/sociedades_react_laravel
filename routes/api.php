@@ -66,6 +66,9 @@ Route::prefix('v1')->group(function () {
         Route::apiResource('/admin/user', UserController::class);
         Route::apiResource('/admin/categoria', CategoriaController::class);
         Route::apiResource('/admin/entidad', EmpresaClient::class);
+
+        //ApiResource es un método que crea automáticamente las rutas para un recurso RESTful. En este caso, estamos creando las rutas para los recursos 'user', 'categoria' y 'entidad' de los controladores correspondientes. Estas rutas permiten realizar operaciones CRUD (Crear, Leer, Actualizar, Eliminar) sobre los usuarios, categorías y entidades de la aplicación.
+
     });
 
     Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
