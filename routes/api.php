@@ -57,7 +57,7 @@ Route::prefix('v1')->group(function () {
 
         //Client por que es una ruta privada y se necesita autenticación.
 
-        Route::apiResource('/client/entidad', EntidadController::class); //apiResource es un método que crea automáticamente las rutas para un recurso RESTful. En este caso, estamos creando las rutas para el recurso 'entidad' del controlador 'EntidadController'. Estas rutas permiten realizar operaciones CRUD (Crear, Leer, Actualizar, Eliminar) sobre las entidades de la aplicación.
+        Route::apiResource('/client/entidad', EmpresaClient::class); //apiResource es un método que crea automáticamente las rutas para un recurso RESTful. En este caso, estamos creando las rutas para el recurso 'entidad' del controlador 'EntidadController'. Estas rutas permiten realizar operaciones CRUD (Crear, Leer, Actualizar, Eliminar) sobre las entidades de la aplicación.
 
         //::ruta del rol admin
 
@@ -65,7 +65,7 @@ Route::prefix('v1')->group(function () {
 
         Route::apiResource('/admin/user', UserController::class);
         Route::apiResource('/admin/categoria', CategoriaController::class);
-        Route::apiResource('/admin/entidad', EmpresaClient::class);
+        Route::apiResource('/admin/entidad', EntidadController::class);
 
         //ApiResource es un método que crea automáticamente las rutas para un recurso RESTful. En este caso, estamos creando las rutas para los recursos 'user', 'categoria' y 'entidad' de los controladores correspondientes. Estas rutas permiten realizar operaciones CRUD (Crear, Leer, Actualizar, Eliminar) sobre los usuarios, categorías y entidades de la aplicación.
 

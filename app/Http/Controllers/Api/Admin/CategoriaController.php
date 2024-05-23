@@ -27,10 +27,10 @@ class CategoriaController extends Controller
     {
         //Acá se puede realizar una validación de los datos que llegan en la petición si es necesario...
         $data = new Categoria($request->all());
-        //Upload image base64
+        //Upload image base64 --> Nos va a evitar problemas con la imagen
         if ($request->urlfoto) {
             $img = $request->urlfoto;
-            //Process image
+            //Process image, mueve la imagen a la carpeta publica
             $folderPath = "/img/categoria/";
             $image_parts = explode(";base64,", $img);
             $image_type_aux = explode("image/", $image_parts[0]);
@@ -38,6 +38,7 @@ class CategoriaController extends Controller
             $image_base64 = base64_decode($image_parts[1]);
             $file = $folderPath . Str::slug($request->nombre) . '.' . $image_type;
             file_put_contents(public_path($file), $image_base64);
+            //Se guarda el nombre de la imagen en la base de datos
             $data->urlfoto  =   Str::slug($request->nombre) . '.' . $image_type;
         }
 
@@ -49,15 +50,11 @@ class CategoriaController extends Controller
     // Método show del controlador de categorías.
     // Este método se encarga de buscar una categoría específica por su ID en la base de datos.
     // Si la categoría se encuentra, se devuelve una respuesta HTTP con los datos de la categoría en formato JSON y un código de estado 200.
-    // Si la categoría no se encuentra, se devuelve una respuesta HTTP con un mensaje de error en formato JSON y un código de estado 404.
+    // Para que la API devuelva un código de estado 404 (Not Found) cuando no se encuentra una categoría, se puede usar el método findOrFail en lugar de find
     public function show($id)
     {
         $data = Categoria::find($id);
-        if ($data) {
-            return response()->json($data, 200);
-        } else {
-            return response()->json(['message' => 'User not found'], 404);
-        }
+        return response()->json($data, 200);
     }
 
     // Método update del controlador de categorías.
@@ -95,6 +92,6 @@ class CategoriaController extends Controller
     {
         $data = Categoria::find($id);
         $data->delete();
-        return response()->json("Categoría elimninada", 200);
+        return response()->json("Categoría eliminada", 200);
     }
 }
