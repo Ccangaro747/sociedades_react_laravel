@@ -1,10 +1,14 @@
-import React from 'react'
-import { Outlet } from 'react-router-dom'
+import React from "react";
+import { Navigate, Outlet } from "react-router-dom";
+import AuthUser from "./AuthUser";
 
 const ProtectedRoutes = () => {
-  return (
-    <Outlet/>
-  )
-}
+    const { getToken } = AuthUser()
+    if(!getToken()){
+        return <Navigate to={"/login"}/>;
+    }
 
-export default ProtectedRoutes
+    return <Outlet />;
+};
+
+export default ProtectedRoutes;
