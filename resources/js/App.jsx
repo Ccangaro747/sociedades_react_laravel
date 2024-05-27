@@ -11,6 +11,7 @@ import ProtectedRoutes from './pageauth/ProtectedRoutes';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 //Auth Pages
 import Login from './pageauth/Login';
+import Register from './pageauth/Register';
 
 
 
@@ -21,6 +22,7 @@ const App = () => {
         <Route path="/" element={<LayoutPublic/>}>
           <Route index element={<PageHome/>} />
           <Route path="/login" element={<Login/>} />
+          <Route path="/register" element={<Register/>} />
         </Route>
         <Route element={<ProtectedRoutes/>}>
           <Route path="/admin" element={<LayoutAdmin/>}>
