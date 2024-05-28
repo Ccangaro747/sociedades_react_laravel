@@ -12,6 +12,9 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 //Auth Pages
 import Login from './pageauth/Login';
 import Register from './pageauth/Register';
+import PanelAdmin from './pageadmin/PanelAdmin';
+import PageClient from './pageclient/PageClient';
+
 
 
 
@@ -26,10 +29,11 @@ const App = () => {
         </Route>
         <Route element={<ProtectedRoutes/>}>
           <Route path="/admin" element={<LayoutAdmin/>}>
-            <Route index element={<PageHome/>} />
+            <Route index element={<PanelAdmin/>} />
           </Route>
           <Route path="/client" element={<LayoutClient/>}>
             <Route index element={<PageHome/>} />
+            <Route index element={<PageClient/>} />
           </Route>
         </Route>
       </Routes>

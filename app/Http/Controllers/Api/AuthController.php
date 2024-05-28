@@ -59,6 +59,7 @@ class AuthController extends Controller
 
             $response['token'] = $user->createToken('myApp')->plainTextToken;
             $response['user'] = $user;
+            $response['message'] = 'Inicio de sesión exitoso';
             $response['success'] = true;
         }
         return response()->json($response, 200);
@@ -73,5 +74,5 @@ class AuthController extends Controller
             "message" => "Sesión cerrada"
         ];
         return response()->json($response, 200);
-    } 
+    }
 }

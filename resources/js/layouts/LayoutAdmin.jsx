@@ -9,7 +9,7 @@ const LayoutAdmin = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        if (getRol != "admin") {
+        if (getRol()!= "admin") {
             navigate("/");
         }
     }, []);
