@@ -14,41 +14,36 @@ const Navbar = () => {
 
     const renderLinks = () => {
         if (getToken()) {
-            return (
-                <>
-                    <li className="mr-3">
-                        <a
-                            className="inline-block px-4 py-2 text-gray-600 no-underline hover:text-gray-200 hover:text-underline"
-
-                            href={`/${getRol()}`}
-                        >
-                            Administracion
-                        </a>
-                    </li>
-                    <li className="mr-3">
-                        <a
-                            className="inline-block px-4 py-2 text-gray-600 no-underline hover:text-gray-200 hover:text-underline"
-                            href="#"
-                            onClick={logoutUser}
-                        >
-                            Logout
-                        </a>
-                    </li>
-                </>
-            );
+            return [
+                <li className="mr-3" key="admin">
+                    <a
+                        className="inline-block px-4 py-2 text-gray-600 no-underline hover:text-gray-200 hover:text-underline"
+                        href={`/${getRol()}`}
+                    >
+                        Administracion
+                    </a>
+                </li>,
+                <li className="mr-3" key="logout">
+                    <a
+                        className="inline-block px-4 py-2 text-gray-600 no-underline hover:text-gray-200 hover:text-underline"
+                        href="#"
+                        onClick={logoutUser}
+                    >
+                        Logout
+                    </a>
+                </li>
+            ];
         } else {
-            return (
-                <>
-                    <li className="mr-3">
-                        <a
-                            className="inline-block px-4 py-2 text-gray-600 no-underline hover:text-gray-200 hover:text-underline"
-                            href="/login"
-                        >
-                            Login
-                        </a>
-                    </li>
-                </>
-            );
+            return [
+                <li className="mr-3" key="login">
+                    <a
+                        className="inline-block px-4 py-2 text-gray-600 no-underline hover:text-gray-200 hover:text-underline"
+                        href="/login"
+                    >
+                        Login
+                    </a>
+                </li>
+            ];
         }
     };
 
@@ -81,7 +76,7 @@ const Navbar = () => {
                                 Categorias
                             </a>
                         </li>
-                        <li className="mr-3">{renderLinks()}</li>
+                        {renderLinks()}
                     </ul>
                 </div>
             </div>
