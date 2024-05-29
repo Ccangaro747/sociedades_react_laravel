@@ -25,7 +25,7 @@ const Login = () => {
         //Autenticación
         Config.getLogin({ email, password }).then(({ data }) => {
             if (data.success) {
-                //console.log(data)
+                console.log(data)
                 setToken(data.user, data.token, data.user.roles[0].name);
             } else {
                 setMessage(data.message);
