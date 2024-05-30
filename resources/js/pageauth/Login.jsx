@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import AuthUser from "./AuthUser";
 import { Link, useNavigate } from "react-router-dom";
 import Config from "../Config";
+import axios from "axios";
 
 const Login = () => {
     const { setToken, getToken } = AuthUser();
@@ -22,15 +23,17 @@ const Login = () => {
     const submitLogin = async (e) => {
         e.preventDefault();
 
+        await axios.get("/sanctum/csrf-cookie").then((response) => {
         //Autenticación
-        Config.getLogin({ email, password }).then(({ data }) => {
-            if (data.success) {
+        Config.getLogin({ email, password }).then(( data ) => {
+            if (data.data.success) {
                 console.log(data)
-                setToken(data.user, data.token, data.user.roles[0].name);
+                setToken(data.data.user, data.data.token, data.data.user.roles[0].name);
             } else {
                 setMessage(data.message);
             }
         });
+        })
     };
 
     return (
