@@ -56,21 +56,21 @@ const Navbar = () => {
     };
 
     return (
-        <nav className="w-full p-2 mt-0 bg-gray-800">
+        <nav className="w-full p-2 mt-0 bg-white shadow-md">
             <div className="container flex flex-wrap items-center mx-auto">
                 <div className="flex justify-center w-full font-extrabold text-white md:w-1/2 md:justify-start">
                     <a
-                        className="text-white no-underline hover:text-white hover:no-underline"
+                        className="text-white no-underline hover:text-black hover:no-underline"
                         href="#"
                     >
-                        Navbar
+                        <img src="/logo.png" alt="Logo" className="object-contain h-20 w-30" />
                     </a>
                 </div>
                 <div className="flex content-center justify-between w-full pt-2 md:w-1/2 md:justify-end">
                     <ul className="flex items-center justify-between flex-1 list-reset md:flex-none">
                         <li className="mr-3">
                             <a
-                                className="inline-block px-4 py-2 text-white no-underline"
+                                className="inline-block px-4 py-2 text-gray-600 no-underline hover:text-gray-200 hover:text-underline"
                                 href="/"
                             >
                                 Home
