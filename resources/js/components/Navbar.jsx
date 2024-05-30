@@ -6,9 +6,17 @@ const Navbar = () => {
     const {getRol, getLogout, getToken } = AuthUser();
 
     const logoutUser = () => {
-        Config.getLogout("/logout").then((response) => {
-            console.log(response);
+        const token = getToken(); // Obtén el token de autenticación
+
+        axios.post("/api/v1/auth/logout", {}, {
+            headers: {
+                'Authorization': `Bearer ${token}` // Envía el token en la cabecera de la solicitud
+            }
+        }).then((response) => {
+            console.log(response)
             getLogout();
+        }).catch((error) => {
+            console.log(error);
         });
     };
 
