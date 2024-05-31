@@ -6,32 +6,22 @@ const Sidebar = () => {
         <div className="pt-12 pb-12 sm:w-1/4">
             <div>
                 <NavLink
-                    to={`/admin`}
-                    className="block p-3 my-2 no-underline bg-gray-200 border rounded"
-
-                >
-                    Home
-                </NavLink>
-                <NavLink
                     to={`/admin/user`}
-                    className="block p-3 my-2 no-underline bg-gray-200 border rounded"
-
+                    className="block max-w-xs p-6 mx-auto my-2 space-y-3 no-underline bg-white rounded-lg shadow-lg group ring-1"
                 >
                     User
                 </NavLink>
                 <NavLink
                     to={`/admin/categoria`}
-                    className="block p-3 my-2 no-underline bg-gray-200 border rounded"
-
+                    className="block max-w-xs p-6 mx-auto my-2 space-y-3 no-underline bg-white rounded-lg shadow-lg group ring-1"
                 >
-                    Categoria
+                    Categoría
                 </NavLink>
                 <NavLink
                     to={`/admin/empresa`}
-                    className="block p-3 my-2 no-underline bg-gray-200 border rounded"
-                    
+                    className="block max-w-xs p-6 mx-auto my-2 space-y-3 no-underline bg-white rounded-lg shadow-lg group ring-1"
                 >
-                    Empresa
+                    Entidad
                 </NavLink>
             </div>
         </div>
@@ -85,4 +75,3 @@ const Sidebar = () => {
 export default Sidebar;
 
 */
-
