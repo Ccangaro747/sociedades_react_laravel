@@ -83,7 +83,7 @@ const Navbar = () => {
                     </a>
                 </div>
                 <div className="flex content-center justify-between w-full pt-2 md:w-1/2 md:justify-end">
-                    <ul className="flex items-center justify-between flex-1 list-reset md:flex-none">
+                    <ul className="flex flex-col items-center justify-between flex-1 list-reset md:flex-none md:flex-row">
                         <li className="mr-3">
                             <a
                                 className="inline-block px-4 py-2 text-gray-600 no-underline hover:text-gray-200 hover:text-underline"
