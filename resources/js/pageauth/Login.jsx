@@ -24,23 +24,31 @@ const Login = () => {
         e.preventDefault();
 
         await axios.get("/sanctum/csrf-cookie").then((response) => {
-        //Autenticación
-        Config.getLogin({ email, password }).then(( data ) => {
-            if (data.data.success) {
-                console.log(data)
-                setToken(data.data.user, data.data.token, data.data.user.roles[0].name);
-            } else {
-                setMessage(data.message);
-            }
+            //Autenticación
+            Config.getLogin({ email, password }).then((data) => {
+                if (data.data.success) {
+                    console.log(data);
+                    setToken(
+                        data.data.user,
+                        data.data.token,
+                        data.data.user.roles[0].name,
+                    );
+                } else {
+                    setMessage("Usuario o contraseña incorrectos");
+                }
+            });
         });
-        })
     };
 
     return (
         <div className="flex items-center justify-center h-screen bg-gray-200">
             <div className="p-6 bg-white rounded shadow-md w-80">
-                <h2 className="mb-5 text-2xl font-bold text-center text-gray-900">
-                    Login
+                <h2 className="flex justify-center text-2xl font-bold text-center text-gray-900">
+                    <img
+                        src="/logo-2.png"
+                        alt=""
+                        className="w-24 h-auto mx-auto"
+                    />
                 </h2>
                 <form>
                     <div className="mb-4">
@@ -65,25 +73,17 @@ const Login = () => {
                             required
                         />
                     </div>
+
                     <div className="mb-6">
                         <button
-                            className="w-full px-4 py-2 font-bold text-white bg-blue-500 rounded hover:bg-blue-700 focus:outline-none focus:shadow-outline"
+                            className="w-full px-4 py-2 font-bold text-white bg-green-500 rounded hover:bg-green-700 focus:outline-none focus:shadow-outline"
                             type="button"
                             onClick={submitLogin}
                         >
                             Enviar
+
                         </button>
-                    </div>
-                    <div className="text-xs text-center">
-                        <p>{message}</p>
-                        <hr />
-                        <p>Primera vez... debe registrarse</p>
-                        <Link
-                            to="/register"
-                            className="w-full px-4 py-2 font-bold text-white bg-blue-500 rounded hover:bg-blue-700 focus:outline-none focus:shadow-outline"
-                        >
-                            Registro
-                        </Link>
+                        <p className="mt-2 text-center">{message}</p>
                     </div>
                 </form>
             </div>
