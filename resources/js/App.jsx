@@ -31,7 +31,7 @@ const App = () => {
         <Route element={<ProtectedRoutes/>}>
           <Route path="/admin" element={<LayoutAdmin/>}>
             <Route index element={<PanelAdmin/>} />
-            <Route path="/user" element={<UserAll/>}/>
+            <Route path="user" element={<UserAll/>}/>
           </Route>
           <Route path="/client" element={<LayoutClient/>}>
             <Route index element={<PageHome/>} />
