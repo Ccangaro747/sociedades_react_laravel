@@ -3,6 +3,7 @@ import axios from "axios"; // Importar axios
 import Sidebar from "./Sidebar";
 import AuthUser from "../pageauth/AuthUser"; // Importar AuthUser
 import ReactPaginate from "react-paginate"; // Importar ReactPaginate
+import { BeatLoader } from "react-spinners";
 
 const UserAll = () => {
     const [users, setUsers] = useState([]);
@@ -60,7 +61,15 @@ const UserAll = () => {
                         <tbody>
                             {!currentUsers.length ? (
                                 <tr>
-                                    <td colSpan="3">...Loading</td>
+                                    <td colSpan="3">
+                                        <div className="flex justify-center">
+                                            <BeatLoader
+                                                color="#32CD32"
+                                                loading={true}
+                                                size={15}
+                                            />
+                                        </div>
+                                    </td>
                                 </tr>
                             ) : (
                                 currentUsers.map((user, index) => (
