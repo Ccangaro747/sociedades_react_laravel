@@ -12,5 +12,5 @@ export default{
 
 
     // Rol Admin
-    getUserAll:()=>axios.get(`${base_api_url}/admin/user`),
+    getUserAll:()=>axios.get(`${base_api_url}/admin/user`), //Se crea en el UserAll.jsx, se podría eliminar
 }
