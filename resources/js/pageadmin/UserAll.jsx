@@ -27,26 +27,28 @@ const UserAll = () => {
                 <table className="w-full table-auto">
                     <thead>
                         <tr className="text-left">
-                            <th className="px-4 py-2">ORDEN</th>
+                            <th className="px-4 py-2">ID</th>
                             <th className="px-4 py-2">NAME</th>
                             <th className="px-4 py-2">ACCION</th>
                         </tr>
                     </thead>
                     <tbody>
                         {
-                            !users ? "...Loading" : users.map(
-                                (user) => {
-                                    return(
-                                    <tr key={user.id}>
-                                        <td>{user.id}</td>
-                                        <td>{user.name}</td>
+                            !users ? (
+                                <tr>
+                                    <td colSpan="3">...Loading</td>
+                                </tr>
+                            ) : (
+                                users.map((user, index) => (
+                                    <tr key={index}>
+                                        <td className="px-4 py-2 border">{user.id}</td>
+                                        <td className="px-4 py-2 border">{user.name}</td>
                                         <td className="px-4 py-2 border">
                                             <button className="px-2 py-1 mr-2 text-white bg-blue-500 rounded">EDIT</button>
                                             <button className="px-2 py-1 text-white bg-red-500 rounded">DELETE</button>
                                         </td>
                                     </tr>
-                                    )
-                                }
+                                ))
                             )
                         }
                     </tbody>
