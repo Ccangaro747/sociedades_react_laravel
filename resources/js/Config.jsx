@@ -12,5 +12,5 @@ export default{
 
 
     // Rol Admin
-    getUserAll:()=>axios.post(`${base_api_url}/admin/user`),
+    getUserAll:()=>axios.get(`${base_api_url}/admin/user`),
 }

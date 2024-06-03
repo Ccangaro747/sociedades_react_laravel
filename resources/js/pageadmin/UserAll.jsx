@@ -5,7 +5,7 @@ import Config from '../Config'
 
 const UserAll = () => {
 
-    const [user, setUser] = useState()
+    const [users, setUsers] = useState()
 
     useEffect(() => {
         getUserAll();
@@ -13,8 +13,9 @@ const UserAll = () => {
 
     const getUserAll = async () => {
         const response = await Config.getUserAll();
-        console.log(response.data)
-        //setUser(response.data);
+
+
+        setUsers(response.data);
     }
 
 
@@ -32,14 +33,22 @@ const UserAll = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td className="px-4 py-2 border">1</td>
-                            <td className="px-4 py-2 border">John</td>
-                            <td className="px-4 py-2 border">
-                                <button className="px-2 py-1 mr-2 text-white bg-blue-500 rounded">EDIT</button>
-                                <button className="px-2 py-1 text-white bg-red-500 rounded">DELETE</button>
-                            </td>
-                        </tr>
+                        {
+                            !users ? "...Loading" : users.map(
+                                (user) => {
+                                    return(
+                                    <tr key={user.id}>
+                                        <td>{user.id}</td>
+                                        <td>{user.name}</td>
+                                        <td className="px-4 py-2 border">
+                                            <button className="px-2 py-1 mr-2 text-white bg-blue-500 rounded">EDIT</button>
+                                            <button className="px-2 py-1 text-white bg-red-500 rounded">DELETE</button>
+                                        </td>
+                                    </tr>
+                                    )
+                                }
+                            )
+                        }
                     </tbody>
                 </table>
             </div>

@@ -14,6 +14,10 @@ class UserController extends Controller
         $data = User::get(["id", "name"]);
         return response()->json($data, 200);
     }
+
+    public function store(Request $request){
+        
+    }
     //show -> Mostrar un usuario específico
     public function show($id){
         $data = User::find($id);
