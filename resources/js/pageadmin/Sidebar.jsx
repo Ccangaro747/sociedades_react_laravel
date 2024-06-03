@@ -7,19 +7,19 @@ const Sidebar = () => {
             <div>
                 <NavLink
                     to={`/admin/user`}
-                    className="block max-w-xs p-6 mx-auto my-2 space-y-3 no-underline bg-white rounded-lg shadow-lg group ring-1"
+                    className="block max-w-xs p-6 mx-auto my-2 space-y-3 text-black no-underline bg-white rounded-lg shadow-lg group ring-1"
                 >
                     User
                 </NavLink>
                 <NavLink
                     to={`/admin/categoria`}
-                    className="block max-w-xs p-6 mx-auto my-2 space-y-3 no-underline bg-white rounded-lg shadow-lg group ring-1"
+                    className="block max-w-xs p-6 mx-auto my-2 space-y-3 text-black no-underline bg-white rounded-lg shadow-lg group ring-1"
                 >
                     Categoría
                 </NavLink>
                 <NavLink
                     to={`/admin/empresa`}
-                    className="block max-w-xs p-6 mx-auto my-2 space-y-3 no-underline bg-white rounded-lg shadow-lg group ring-1"
+                    className="block max-w-xs p-6 mx-auto my-2 space-y-3 text-black no-underline bg-white rounded-lg shadow-lg group ring-1"
                 >
                     Entidad
                 </NavLink>
