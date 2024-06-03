@@ -43,12 +43,15 @@ const Login = () => {
     return (
         <div className="flex items-center justify-center h-screen bg-gray-200">
             <div className="p-6 bg-white rounded shadow-md w-80">
-                <h2 className="flex justify-center text-2xl font-bold text-center text-gray-900">
+                <h2 className="flex justify-center text-2xl font-bold text-center text-gray-600">
+                    Iniciar Sesión
+                    {/*
                     <img
-                        src="/logo-2.png"
-                        alt=""
-                        className="w-24 h-auto mx-auto"
+                    src="/logo-2.png"
+                    alt=""
+                    className="w-24 h-auto mx-auto"
                     />
+                    */}
                 </h2>
                 <form>
                     <div className="mb-4">
@@ -80,8 +83,7 @@ const Login = () => {
                             type="button"
                             onClick={submitLogin}
                         >
-                            Enviar
-
+                            Ingresar
                         </button>
                         <p className="mt-2 text-center">{message}</p>
                     </div>
