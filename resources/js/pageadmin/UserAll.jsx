@@ -1,21 +1,30 @@
 import React, { useEffect, useState } from 'react'
+import axios from 'axios'; // Importar axios
 import Sidebar from './Sidebar'
-import Config from '../Config'
-
+import AuthUser from "../pageauth/AuthUser"; // Importar AuthUser
 
 const UserAll = () => {
 
     const [users, setUsers] = useState()
+    const { getToken } = AuthUser(); // Obtener getToken de AuthUser
 
     useEffect(() => {
         getUserAll();
     },[])
 
     const getUserAll = async () => {
-        const response = await Config.getUserAll();
+        const token = getToken(); // Obtener el token de autenticación
+        try {
+            const response = await axios.get('http://localhost:8000/api/v1/admin/user', {
+                headers: {
+                    'Authorization': `Bearer ${token}` // Usar el token obtenido
+                }
+            });
 
-
-        setUsers(response.data);
+            setUsers(response.data);
+        } catch (error) {
+            console.error('Error al obtener los usuarios:', error);
+        }
     }
 
 
