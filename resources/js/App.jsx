@@ -15,7 +15,8 @@ import Register from './pageauth/Register';
 import PanelAdmin from './pageadmin/PanelAdmin';
 import PageClient from './pageclient/PageClient';
 
-
+//rol ADMIN Pages
+import UserAll from './pageadmin/UserAll';
 
 
 const App = () => {
@@ -30,6 +31,7 @@ const App = () => {
         <Route element={<ProtectedRoutes/>}>
           <Route path="/admin" element={<LayoutAdmin/>}>
             <Route index element={<PanelAdmin/>} />
+            <Route path="/user" element={<UserAll/>}/>
           </Route>
           <Route path="/client" element={<LayoutClient/>}>
             <Route index element={<PageHome/>} />
