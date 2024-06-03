@@ -1,7 +1,23 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Sidebar from './Sidebar'
+import Config from '../Config'
+
 
 const UserAll = () => {
+
+    const [user, setUser] = useState()
+
+    useEffect(() => {
+        getUserAll();
+    },[])
+
+    const getUserAll = async () => {
+        const response = await Config.getUserAll();
+        console.log(response.data)
+        //setUser(response.data);
+    }
+
+
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 sm:flex-row">
         <div className="container flex flex-col-reverse mx-auto overflow-hidden bg-white rounded-lg shadow-lg sm:flex-row">
