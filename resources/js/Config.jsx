@@ -6,11 +6,11 @@ const base_api_url="http://localhost:8000/api/v1";
 
 export default{
     //Auth
-    getRegister:(data)=>axios.post(`${base_api_url}/auth/register`,data),
-    getLogin:(data)=>axios.post(`${base_api_url}/auth/login`,data),
-    getLogout:(data)=>axios.post(`${base_api_url}/auth/logout`,data), //Se crea en el Navbar.jsx, se podría eliminar
+    getRegister:(data)=>axios.post(`${base_api_url}/auth/register`,data), // Se crea en el Register.jsx, se podría eliminar o dejar de referencia
+    getLogin:(data)=>axios.post(`${base_api_url}/auth/login`,data), // Se crea en el Login.jsx, se podría eliminar o dejar de referencia
+    getLogout:(data)=>axios.post(`${base_api_url}/auth/logout`,data), //Se crea en el Navbar.jsx, se podría eliminar o dejar de referencia
 
 
     // Rol Admin
-    getUserAll:()=>axios.get(`${base_api_url}/admin/user`), //Se crea en el UserAll.jsx, se podría eliminar
+    getUserAll:()=>axios.get(`${base_api_url}/admin/user`), //Se crea en el UserAll.jsx, se podría eliminar o dejar de referencia
 }

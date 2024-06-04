@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import Config from '../Config';
+import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import AuthUser from './AuthUser';
 
@@ -14,18 +14,27 @@ const Register = () => {
         if(getToken()){
           navigate("/")
         }
-      },[])
+    },[])
 
-      const submitRegistro = async(e) =>{
+    const submitRegistro = async(e) =>{
         e.preventDefault();
 
-        Config.getRegister({name,email,password})
-        .then(({data})=>{
-            if(data.success){
-                navigate("/login")
-            }
-        })
-
+        // Primero, obtenemos la cookie CSRF
+        await axios.get("/sanctum/csrf-cookie").then((response) => {
+            // Luego, hacemos la solicitud de registro
+            axios.post("/api/v1/auth/register", { name, email, password }, {
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest',
+                    'X-CSRF-TOKEN': response.data.csrfToken // Aquí enviamos el token CSRF
+                }
+            }).then((data) => {
+                if (data.data.success) {
+                    navigate("/login")
+                }
+            }).catch((error) => {
+                console.error('Error al registrarse:', error);
+            });
+        });
     }
 
     return (

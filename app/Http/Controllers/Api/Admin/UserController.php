@@ -16,8 +16,9 @@ class UserController extends Controller
     }
 
     public function store(Request $request){
-        
+
     }
+
     //show -> Mostrar un usuario específico
     public function show($id){
         $data = User::find($id);
