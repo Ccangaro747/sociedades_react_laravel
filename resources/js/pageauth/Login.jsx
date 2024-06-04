@@ -23,19 +23,29 @@ const Login = () => {
     const submitLogin = async (e) => {
         e.preventDefault();
 
+        // Primero, obtenemos la cookie CSRF
         await axios.get("/sanctum/csrf-cookie").then((response) => {
-            //Autenticación
-            Config.getLogin({ email, password }).then((data) => {
+            // Luego, hacemos la solicitud de login
+            axios.post("/api/v1/auth/login", { email, password }, {
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest',
+                    'X-CSRF-TOKEN': response.data.csrfToken // Aquí enviamos el token CSRF
+                }
+            }).then((data) => {
                 if (data.data.success) {
                     console.log(data);
+                    // Si el login es exitoso, guardamos el token de autenticación
                     setToken(
                         data.data.user,
                         data.data.token,
                         data.data.user.roles[0].name,
                     );
+                    navigate("/");
                 } else {
-                    setMessage("Usuario o contraseña incorrectos");
+                    setMessage("Error al iniciar sesión");
                 }
+            }).catch((error) => {
+                console.error('Error al iniciar sesión:', error);
             });
         });
     };
