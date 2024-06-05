@@ -4,6 +4,7 @@ import Sidebar from "./Sidebar";
 import AuthUser from "../pageauth/AuthUser"; // Importar AuthUser
 import ReactPaginate from "react-paginate"; // Importar ReactPaginate
 import { BeatLoader } from "react-spinners";
+import { Link } from "react-router-dom";
 
 const UserAll = () => {
     const [users, setUsers] = useState([]);
@@ -81,12 +82,9 @@ const UserAll = () => {
                                             {user.name}
                                         </td>
                                         <td className="px-4 py-2 border">
-                                            <button className="px-2 py-1 mr-2 text-white bg-blue-500 rounded">
-                                                EDIT
-                                            </button>
-                                            <button className="px-2 py-1 text-white bg-red-500 rounded">
-                                                DELETE
-                                            </button>
+                                        <button className="px-2 py-1 text-white rounded bg-slate-400">
+                                                <Link to={`/admin/user/edit/${user.id}`} className="no-underline">Editar</Link>
+                                        </button>
                                         </td>
                                     </tr>
                                 ))
