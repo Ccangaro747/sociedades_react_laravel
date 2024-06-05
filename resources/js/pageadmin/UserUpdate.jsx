@@ -5,6 +5,9 @@ import AuthUser from "../pageauth/AuthUser"; // Importar AuthUser
 import { BeatLoader } from "react-spinners";
 import { Link, useNavigate, useParams } from "react-router-dom";
 
+
+
+
 const UserUpdate = () => {
     const navigate = useNavigate();
     const { id } = useParams();

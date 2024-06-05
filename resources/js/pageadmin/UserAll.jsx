@@ -82,7 +82,7 @@ const UserAll = () => {
                                             {user.name}
                                         </td>
                                         <td className="px-4 py-2 border">
-                                        <button className="px-2 py-1 text-white rounded bg-slate-400">
+                                        <button className="px-2 py-1 text-white rounded bg-slate-200">
                                                 <Link to={`/admin/user/edit/${user.id}`} className="no-underline">Editar</Link>
                                         </button>
                                         </td>
