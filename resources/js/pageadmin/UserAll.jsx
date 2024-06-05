@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 const UserAll = () => {
     const [users, setUsers] = useState([]);
     const [currentPage, setCurrentPage] = useState(0); // Página actual
-    const usersPerPage = 5; // Usuarios por página
+    const usersPerPage = 4; // Usuarios por página
 
     const { getToken } = AuthUser(); // Obtener getToken de AuthUser
 
@@ -82,7 +82,7 @@ const UserAll = () => {
                                             {user.name}
                                         </td>
                                         <td className="px-4 py-2 border">
-                                            <button className="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-green-600 border border-transparent rounded-md hover:bg-gray-700">
+                                            <button className="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-green-600 border border-transparent rounded-md hover:bg-green-700">
                                                 <Link
                                                     to={`/admin/user/edit/${user.id}`}
                                                     className="text-white no-underline"
