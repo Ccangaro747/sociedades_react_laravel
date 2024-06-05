@@ -8,7 +8,12 @@ import LayoutClient from "./layouts/LayoutClient";
 //Public Pages
 import PageHome from "./pagepublic/PageHome";
 import ProtectedRoutes from "./pageauth/ProtectedRoutes";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import {
+    BrowserRouter as Router,
+    Route,
+    Routes,
+    useNavigate,
+} from "react-router-dom";
 //Auth Pages
 import Login from "./pageauth/Login";
 import Register from "./pageauth/Register";
@@ -18,6 +23,14 @@ import PageClient from "./pageclient/PageClient";
 //rol ADMIN Pages
 import UserAll from "./pageadmin/UserAll";
 import UserUpdate from "./pageadmin/UserUpdate";
+
+const RedirectToUser = () => {
+    let navigate = useNavigate();
+    React.useEffect(() => {
+        navigate("/admin/user");
+    }, [navigate]);
+    return null;
+};
 
 const App = () => {
     return (
@@ -30,7 +43,7 @@ const App = () => {
                 </Route>
                 <Route element={<ProtectedRoutes />}>
                     <Route path="/admin" element={<LayoutAdmin />}>
-                        <Route index element={<PanelAdmin />} />
+                        <Route index element={<RedirectToUser />} />
                         <Route path="user" element={<UserAll />} />
                         <Route path="user/edit/:id" element={<UserUpdate />} />
                     </Route>
