@@ -38,6 +38,7 @@ const UserUpdate = () => {
     const submitUpdate = async (ev) => {
         ev.preventDefault();
         const token = getToken(); // Obtener el token de autenticación
+        console.log(`Token: ${token}`); // Imprimir el token
         try {
             await axios.put(
                 `http://localhost:8000/api/v1/admin/user/${id}`,
