@@ -11,7 +11,9 @@ class UserController extends Controller
     //index -> Listar todos los usuarios
     public function index()
     {
-        $data = User::get(["id", "name"]);
+        $data = User::whereHas('roles', function($q){
+            $q->where('name', 'client');
+        })->get(["id", "name"]);
         return response()->json($data, 200);
     }
 
