@@ -1,29 +1,31 @@
+// Importamos las librerías necesarias
 import React from "react";
 import ReactDOM from "react-dom/client";
 import "bootstrap/dist/css/bootstrap.min.css";
-//Layouts
+
+// Importamos los layouts
 import LayoutPublic from "./layouts/LayoutPublic";
 import LayoutAdmin from "./layouts/LayoutAdmin";
 import LayoutClient from "./layouts/LayoutClient";
-//Public Pages
+
+// Importamos las páginas públicas
 import PageHome from "./pagepublic/PageHome";
 import ProtectedRoutes from "./pageauth/ProtectedRoutes";
-import {
-    BrowserRouter as Router,
-    Route,
-    Routes,
-    useNavigate,
-} from "react-router-dom";
-//Auth Pages
+
+// Importamos los componentes de react-router-dom y el hook useNavigate
+import { BrowserRouter as Router, Route, Routes, useNavigate } from "react-router-dom";
+
+// Importamos las páginas de autenticación
 import Login from "./pageauth/Login";
 import Register from "./pageauth/Register";
 import PanelAdmin from "./pageadmin/PanelAdmin";
 import PageClient from "./pageclient/PageClient";
 
-//rol ADMIN Pages
+// Importamos las páginas para el rol ADMIN
 import UserAll from "./pageadmin/UserAll";
 import UserUpdate from "./pageadmin/UserUpdate";
 
+// Creamos un componente para redirigir al usuario a "/admin/user"
 const RedirectToUser = () => {
     let navigate = useNavigate();
     React.useEffect(() => {
@@ -32,6 +34,7 @@ const RedirectToUser = () => {
     return null;
 };
 
+// Definimos el componente principal de la aplicación
 const App = () => {
     return (
         <Router>
@@ -57,10 +60,11 @@ const App = () => {
     );
 };
 
+// Exportamos el componente principal
 export default App;
 
+// Renderizamos la aplicación en el elemento con id "root"
 if (document.getElementById("root")) {
     const Index = ReactDOM.createRoot(document.getElementById("root"));
-
     Index.render(<App />);
 }
