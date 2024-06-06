@@ -16,6 +16,7 @@ export default{
     getUserById:(id)=>axios.get(`${base_api_url}/admin/user/${id}`), //Se crea en el UserUpdate.jsx, se podría eliminar o dejar de referencia
     getUserApdate:(data,id)=>axios.put(`${base_api_url}/admin/user/${id}`,data), //Se crea en el UserUpdate.jsx, se podría eliminar o dejar de referencia
 
-    getCategoriaAll:()=>axios.get(`${base_api_url}/admin/categoria`)
+    getCategoriaAll:()=>axios.get(`${base_api_url}/admin/categoria`), //Se crea en el CategoriaAll.jsx, se podría eliminar o dejar de referencia
+    getCategoriaStore:(data)=>axios.post(`${base_api_url}/admin/categoria`,data),
 
 }

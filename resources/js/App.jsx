@@ -25,6 +25,7 @@ import PageClient from "./pageclient/PageClient";
 import UserAll from "./pageadmin/UserAll";
 import UserUpdate from "./pageadmin/UserUpdate";
 import CategoriaAll from "./pageadmin/CategoriaAll";
+import CategoriaStore from "./pageadmin/CategoriaStore";
 
 // Creamos un componente para redirigir al usuario a "/admin/user"
 const RedirectToUser = () => {
@@ -51,6 +52,7 @@ const App = () => {
                         <Route path="user" element={<UserAll />} />
                         <Route path="user/edit/:id" element={<UserUpdate />} />
                         <Route path="categoria" element={<CategoriaAll />} />
+                        <Route path="categoria/create" element={<CategoriaStore />} />
                     </Route>
                     <Route path="/client" element={<LayoutClient />}>
                         <Route index element={<PageHome />} />
