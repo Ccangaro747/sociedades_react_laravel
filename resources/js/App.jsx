@@ -24,6 +24,7 @@ import PageClient from "./pageclient/PageClient";
 // Importamos las páginas para el rol ADMIN
 import UserAll from "./pageadmin/UserAll";
 import UserUpdate from "./pageadmin/UserUpdate";
+import CategoriaAll from "./pageadmin/CategoriaAll";
 
 // Creamos un componente para redirigir al usuario a "/admin/user"
 const RedirectToUser = () => {
@@ -49,6 +50,7 @@ const App = () => {
                         <Route index element={<RedirectToUser />} />
                         <Route path="user" element={<UserAll />} />
                         <Route path="user/edit/:id" element={<UserUpdate />} />
+                        <Route path="categoria" element={<CategoriaAll />} />
                     </Route>
                     <Route path="/client" element={<LayoutClient />}>
                         <Route index element={<PageHome />} />

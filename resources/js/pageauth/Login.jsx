@@ -51,7 +51,7 @@ const Login = () => {
     };
 
     return (
-        <div className="flex items-center justify-center h-screen bg-gray-200">
+        <div className="flex items-center justify-center h-screen">
             <div className="p-6 bg-white rounded shadow-md w-80">
                 <h2 className="flex justify-center text-2xl font-bold text-center text-gray-600">
                     Iniciar Sesión

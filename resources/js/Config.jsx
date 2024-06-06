@@ -13,6 +13,9 @@ export default{
 
     // Rol Admin
     getUserAll:()=>axios.get(`${base_api_url}/admin/user`), //Se crea en el UserAll.jsx, se podría eliminar o dejar de referencia
-    getUserById:(id)=>axios.get(`${base_api_url}/admin/user/${id}`),
-    getUserApdate:(data,id)=>axios.put(`${base_api_url}/admin/user/${id}`,data),
+    getUserById:(id)=>axios.get(`${base_api_url}/admin/user/${id}`), //Se crea en el UserUpdate.jsx, se podría eliminar o dejar de referencia
+    getUserApdate:(data,id)=>axios.put(`${base_api_url}/admin/user/${id}`,data), //Se crea en el UserUpdate.jsx, se podría eliminar o dejar de referencia
+
+    getCategoriaAll:()=>axios.get(`${base_api_url}/admin/categoria`)
+
 }

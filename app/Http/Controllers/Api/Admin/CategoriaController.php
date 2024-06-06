@@ -15,7 +15,7 @@ class CategoriaController extends Controller
     // Finalmente, se devuelve una respuesta HTTP con los datos en formato JSON y un código de estado 200.
     public function index()
     {
-        $data = Categoria::orderBy("orden")->get(["id", "nombre"]);
+        $data = Categoria::orderBy("orden")->get(["id", "orden", "nombre"]);
         return response()->json($data, 200);
     }
 
