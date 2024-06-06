@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import Sidebar from "./Sidebar";
 import AuthUser from "../pageauth/AuthUser";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const CategoriaStore = () => {
     const [nombre, setNombre] = useState("");
@@ -54,7 +54,7 @@ const CategoriaStore = () => {
                 <div className="p-6 sm:w-9/12">
                     <form onSubmit={submitStore}>
                         <div className="mb-3">
-                            <label htmlFor="nombre" className="block text-sm font-medium text-gray-700">
+                            <label htmlFor="nombre" className="sm:w-4/12">
                                 Nombre:
                             </label>
                             <input
@@ -77,6 +77,9 @@ const CategoriaStore = () => {
                             <input className="form-control" type="file" onChange={(e) => handleInputChange(e)} />
                         </div>
                         <div className="flex mt-3 space-x-4">
+                        <Link to={-1} className="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-gray-600 border border-transparent rounded-md hover:bg-gray-700">
+                                ← Back
+                            </Link>
                             <button type="submit" className="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-green-600 border border-transparent rounded-md hover:bg-green-700">
                                 Crear Categoría
                             </button>
