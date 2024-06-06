@@ -24,43 +24,39 @@ const CategoriaStore = () => {
         await Config.getCategoriaStore({nombre,descripcion,orden,urlfoto})
         navigate('/admin/categoria')
     }
-  return (
-    <div className="container mx-auto bg-light">
-        <div className='flex flex-col sm:flex-row'>
-            <Sidebar/>
-            <div className="mt-3 mb-3 sm:w-9/12">
-                <div className="card">
-                    <div className="card-body">
-                        <form onSubmit={submitStore}>
-                            <div className='flex flex-col sm:flex-row'>
-                                <div className="sm:w-8/12">
-                                    <label>Nombre</label>
-                                    <input className='form-control' value={nombre} onChange={(e) => setNombre(e.target.value)} type='text'/>
-                                </div>
-                                <div className="sm:w-4/12">
-                                    <label>Orden</label>
-                                    <input className='form-control' value={orden} onChange={(e) => setOrden(e.target.value)} type='number'/>
-                                </div>
+    return (
+        <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 sm:flex-row">
+            <div className="container flex flex-col-reverse mx-auto overflow-hidden bg-white rounded-lg shadow-lg sm:flex-row">
+                <Sidebar />
+                <div className="p-6 sm:w-9/12">
+                    <form onSubmit={submitStore}>
+                        <div className='flex flex-col sm:flex-row'>
+                            <div className="sm:w-8/12">
+                                <label>Nombre</label>
+                                <input className='form-control' value={nombre} onChange={(e) => setNombre(e.target.value)} type='text'/>
                             </div>
-                            <div className='mt-3'>
-                                <label>Descripcón:</label>
-                                <textarea className='form-control' value={descripcion} onChange={(e) => setDescripcion(e.target.value)} />
+                            <div className="sm:w-4/12">
+                                <label>Orden</label>
+                                <input className='form-control' value={orden} onChange={(e) => setOrden(e.target.value)} type='number'/>
                             </div>
-                            <div className='mt-3'>
-                                <label>Imagen:</label>
-                                <input className="form-control" type="file" onChange={(e) => handleInputChange(e)} />
-                            </div>
-                            <div className="flex mt-3 space-x-4">
-                                <Link to={-1} className="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-gray-600 border border-transparent rounded-md hover:bg-gray-700" >← Back </Link>
-                                <button type='submit' className="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-blue-600 border border-transparent rounded-md hover:bg-blue-700">Crear Categoria</button>
-                            </div>
-                        </form>
-                    </div>
+                        </div>
+                        <div className='mt-3'>
+                            <label>Descripción:</label>
+                            <textarea className='form-control' value={descripcion} onChange={(e) => setDescripcion(e.target.value)} />
+                        </div>
+                        <div className='mt-3'>
+                            <label>Imagen:</label>
+                            <input className="form-control" type="file" onChange={(e) => handleInputChange(e)} />
+                        </div>
+                        <div className="flex mt-5 space-x-4">
+                            <Link to={-1} className="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-gray-600 border border-transparent rounded-md hover:bg-gray-700" >← Back </Link>
+                            <button type='submit' className="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-blue-600 border border-transparent rounded-md hover:bg-blue-700">Crear Categoria</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
-    </div>
-  )
+    );
 }
 
 export default CategoriaStore
