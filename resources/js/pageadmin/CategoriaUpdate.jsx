@@ -30,7 +30,7 @@ const CategoriaUpdate = () => {
                     headers: {
                         Authorization: `Bearer ${token}`,
                     },
-                }
+                },
             );
             setFormData({
                 nombre: response.data.nombre,
@@ -45,41 +45,30 @@ const CategoriaUpdate = () => {
         }
     };
 
-    const handleInputChange = (event) => {
-        const { name, value, type, checked } = event.target;
+    const handleInputChange = (e) => {
         setFormData({
             ...formData,
-            [name]: type === 'checkbox' ? checked : value,
+            [e.target.name]: e.target.value,
         });
     };
 
     const submitUpdate = async (ev) => {
         ev.preventDefault();
         const token = getToken();
-        const formDataToSend = new FormData();
-        formDataToSend.append('nombre', formData.nombre);
-        formDataToSend.append('descripcion', formData.descripcion);
-        formDataToSend.append('orden', formData.orden);
-        formDataToSend.append('menu', formData.menu);
-        if (formData.file) {
-            formDataToSend.append('file', formData.file);
-        }
-
         try {
             await axios.put(
                 `http://localhost:8000/api/v1/admin/categoria/${id}`,
-                formDataToSend,
+                formData,
                 {
                     headers: {
                         Authorization: `Bearer ${token}`,
-                        'Content-Type': 'multipart/form-data'
                     },
-                }
+                },
             );
             navigate("/admin/categoria");
         } catch (error) {
-            setError("Error al actualizar la categoría.");
             console.error("Error al actualizar la categoría:", error);
+            setError(error.message);
         }
     };
 
@@ -102,16 +91,21 @@ const CategoriaUpdate = () => {
                                         id="menu"
                                         name="menu"
                                     />
-                                    <label className="form-check-label" htmlFor='menu'>Portada?</label>
+                                    <label
+                                        className="form-check-label"
+                                        htmlFor="menu"
+                                    >
+                                        Portada?
+                                    </label>
                                 </div>
                             </div>
                             <label htmlFor="nombre" className="sm:w-4/12">
                                 Nombre:
                             </label>
                             <input
+                                className="form-control"
                                 type="text"
                                 name="nombre"
-                                className="block w-full px-3 py-2 mt-1 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                                 value={formData.nombre}
                                 onChange={handleInputChange}
                             />
@@ -119,23 +113,23 @@ const CategoriaUpdate = () => {
                         <div className="sm:w-4/12">
                             <label htmlFor="orden">Orden</label>
                             <input
-                                className='form-control'
+                                className="form-control"
                                 name="orden"
                                 value={formData.orden}
                                 onChange={handleInputChange}
-                                type='number'
+                                type="number"
                             />
                         </div>
-                        <div className='mt-3'>
+                        <div className="mt-3">
                             <label htmlFor="descripcion">Descripción:</label>
                             <textarea
-                                className='form-control'
+                                className="form-control"
                                 name="descripcion"
                                 value={formData.descripcion}
                                 onChange={handleInputChange}
                             />
                         </div>
-                        <div className='mt-3'>
+                        <div className="mt-3">
                             <label htmlFor="file">Imagen:</label>
                             {formData.file && (
                                 <img
@@ -148,17 +142,25 @@ const CategoriaUpdate = () => {
                                 className="form-control"
                                 type="file"
                                 name="file"
-                                onChange={(e) => setFormData({
-                                    ...formData,
-                                    file: e.target.files[0],
-                                })}
+                                onChange={(e) =>
+                                    setFormData({
+                                        ...formData,
+                                        file: e.target.files[0],
+                                    })
+                                }
                             />
                         </div>
                         <div className="flex mt-3 space-x-4">
-                            <Link to={-1} className="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-gray-600 border border-transparent rounded-md hover:bg-gray-700">
+                            <Link
+                                to={-1}
+                                className="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-gray-600 border border-transparent rounded-md hover:bg-gray-700"
+                            >
                                 ← Back
                             </Link>
-                            <button type="submit" className="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-green-600 border border-transparent rounded-md hover:bg-green-700">
+                            <button
+                                type="submit"
+                                className="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-green-600 border border-transparent rounded-md hover:bg-green-700"
+                            >
                                 Actualizar Categoría
                             </button>
                         </div>
