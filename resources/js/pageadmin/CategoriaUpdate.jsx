@@ -5,23 +5,15 @@ import AuthUser from "../pageauth/AuthUser";
 import { Link, useNavigate, useParams } from "react-router-dom";
 
 const CategoriaUpdate = () => {
-    const navigate = useNavigate()
+    const navigate = useNavigate();
     const { id } = useParams();
-    const [nombre, setNombre] = useState("")
-    const [descripcion, setDescripcion] = useState("")
-    const [orden, setOrden] = useState("")
-    const [menu, setMenu] = useState(false)
-    const [urlfoto, setUrlfoto] = useState("foto.jpg")
-    const [file, setFile] = useState("")
+    const [nombre, setNombre] = useState("");
+    const [descripcion, setDescripcion] = useState("");
+    const [orden, setOrden] = useState("");
+    const [menu, setMenu] = useState(false);
+    const [file, setFile] = useState(null);
+    const { getToken } = AuthUser();
 
-    const handleInputChange = async (e) => {
-        let files = e.target.files;
-        let reader = new FileReader();
-        reader.readAsDataURL(files[0]);
-        reader.onload = (e) => {
-            setFile(e.target.result);
-        };
-    };
     useEffect(() => {
         getCategoriaById();
     }, []);
@@ -33,45 +25,65 @@ const CategoriaUpdate = () => {
                 `http://localhost:8000/api/v1/admin/categoria/${id}`,
                 {
                     headers: {
-                        "Authorization": `Bearer ${token}`
-                    }
-                }
+                        Authorization: `Bearer ${token}`,
+                    },
+                },
             );
+
             setNombre(response.data.nombre);
             setDescripcion(response.data.descripcion);
             setOrden(response.data.orden);
             setMenu(response.data.menu);
-            setUrlfoto(response.data.urlfoto);
         } catch (error) {
-            console.error(`Error: ${error}`);
+            console.error("Error al obtener la categoría:", error);
         }
     };
+    const handleInputChange = (event) => {
+        const { name, value } = event.target;
 
-    const submitUpdate = async (e) => {
-        e.preventDefault();
+        switch (name) {
+            case 'nombre':
+                setNombre(value);
+                break;
+            case 'descripcion':
+                setDescripcion(value);
+                break;
+            case 'orden':
+                setOrden(value);
+                break;
+            case 'menu':
+                setMenu(value);
+                break;
+            // Añade aquí más casos si tienes más campos de entrada
+            default:
+                break;
+        }
+    };
+    const [urlfoto, setUrlfoto] = useState("");
+    const submitUpdate = async (ev) => {
+        ev.preventDefault();
         const token = getToken();
-        const body = {
-            nombre,
-            descripcion,
-            orden,
-            menu,
-            urlfoto: file
-        };
+        const formData = new FormData();
+        formData.append('nombre', nombre);
+        formData.append('descripcion', descripcion);
+        formData.append('orden', orden);
+        formData.append('menu', menu);
+        formData.append('file', file);
+
         try {
-            const response = await axios.put(
+            await axios.put(
                 `http://localhost:8000/api/v1/admin/categoria/${id}`,
-                body,
+                formData,
                 {
                     headers: {
-                        "Authorization": `Bearer ${token}`
-                    }
-                }
+                        Authorization: `Bearer ${token}`,
+                        'Content-Type': 'multipart/form-data'
+                    },
+                },
             );
-            if (response.data.status === 'success') {
-                navigate('/admin/categorias');
-            }
+            navigate("/admin/categoria");
         } catch (error) {
-            console.error(`Error: ${error}`);
+            console.error("Error al actualizar la categoría:", error);
         }
     };
 
