@@ -66,10 +66,15 @@ class CategoriaController extends Controller
         //Acá se puede realizar una validación de los datos que llegan en la petición si es necesario...
         //Ej; $request->validate(['nombre' => 'required']);
         $data = Categoria::find($id);
-        $data->fill($request->all());
+        //$data->fill($request->all());
+        $data->nombre = $request->nombre;
+        $data->descripcion = $request->descripcion;
+        $data->orden = $request->orden;
+        $data->slug = Str::slug($request->nombre);
+        $data->menu = $request->menu ? 1 : 0;
         //Upload image base64
-        if ($request->urlfoto) {
-            $img = $request->urlfoto;
+        if ($request->file) {
+            $img = $request->file;
             //Process image
             $folderPath = "/img/categoria/";
             $image_parts = explode(";base64,", $img);
@@ -80,7 +85,7 @@ class CategoriaController extends Controller
             file_put_contents(public_path($file), $image_base64);
             $data->urlfoto  =   Str::slug($request->nombre) . '.' . $image_type;
         }
-        $data->slug = Str::slug($request->nombre);
+        
         $data->save();
         return response()->json($data, 200);
     }

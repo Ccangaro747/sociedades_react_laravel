@@ -49,7 +49,12 @@ const CategoriaAll = () => {
             <div className="container flex flex-col-reverse mx-auto overflow-hidden bg-white rounded-lg shadow-lg sm:flex-row">
                 <Sidebar />
                 <div className="p-6 sm:w-9/12">
-                <Link to={'/admin/categoria/create'} className="inline-block px-4 py-2 text-white no-underline bg-blue-500 rounded hover:bg-blue-700">Crear Categoria</Link>
+                    <Link
+                        to={"/admin/categoria/create"}
+                        className="inline-block px-4 py-2 text-white no-underline bg-blue-500 rounded hover:bg-blue-700"
+                    >
+                        Crear Categoria
+                    </Link>
                     <table className="w-full table-auto">
                         <thead>
                             <tr className="text-left">
@@ -83,7 +88,7 @@ const CategoriaAll = () => {
                                         <td className="px-4 py-2 border">
                                             <button className="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-green-600 border border-transparent rounded-md hover:bg-green-700">
                                                 <Link
-                                                    to={`/admin/category/edit/${categoria.id}`}
+                                                    to={`/admin/categoria/edit/${categoria.id}`}
                                                     className="text-white no-underline"
                                                 >
                                                     Editar
