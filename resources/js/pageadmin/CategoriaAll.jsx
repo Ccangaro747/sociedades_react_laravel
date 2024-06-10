@@ -5,6 +5,7 @@ import AuthUser from "../pageauth/AuthUser";
 import ReactPaginate from "react-paginate";
 import { BeatLoader } from "react-spinners";
 import { Link } from "react-router-dom";
+import Config from "../Config";
 
 const CategoriaAll = () => {
     const [categories, setCategories] = useState([]);
@@ -43,6 +44,28 @@ const CategoriaAll = () => {
         currentPage * categoriesPerPage,
         (currentPage + 1) * categoriesPerPage,
     );
+
+    const _deleteCategoriaById = async (id) => {
+        const isDelete = window.confirm(
+            "¿Estás seguro de eliminar esta categoría?",
+        );
+        if (isDelete) {
+            const token = getToken();
+            try {
+                await axios.delete(
+                    `http://localhost:8000/api/v1/admin/categoria/${id}`,
+                    {
+                        headers: {
+                            Authorization: `Bearer ${token}`,
+                        },
+                    },
+                );
+                getCategoryAll();
+            } catch (error) {
+                console.error("Error al eliminar la categoría:", error);
+            }
+        }
+    };
 
     return (
         <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 sm:flex-row">
@@ -92,6 +115,18 @@ const CategoriaAll = () => {
                                                     className="text-white no-underline"
                                                 >
                                                     Editar
+                                                </Link>
+                                            </button>
+                                            <button
+                                                className="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-red-600 border border-transparent rounded-md hover:bg-red-700"
+                                                onClick={() =>
+                                                    _deleteCategoriaById(
+                                                        categoria.id,
+                                                    )
+                                                }
+                                            >
+                                                <Link className="text-white no-underline">
+                                                    Eliminar
                                                 </Link>
                                             </button>
                                         </td>
