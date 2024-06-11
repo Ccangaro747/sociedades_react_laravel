@@ -20,5 +20,7 @@ export default{
     getCategoriaStore:(data)=>axios.post(`${base_api_url}/admin/categoria`,data), //Se crea en el CategoriaStore.jsx, se podría eliminar o dejar de referencia
     getCategoriaById:(id)=>axios.get(`${base_api_url}/admin/categoria/${id}`), //Se crea en el CategoriaUpdate.jsx, se podría eliminar o dejar de referencia
     getCategoriaUpdate:(data,id)=>axios.put(`${base_api_url}/admin/categoria/${id}`,data), //Se crea en el CategoriaUpdate.jsx, se podría eliminar o dejar de referencia
-    getCategoriaDeleteById:(id)=>axios.delete(`${base_api_url}/admin/categoria/${id}`),
+    getCategoriaDeleteById:(id)=>axios.delete(`${base_api_url}/admin/categoria/${id}`), //Se crea en el CategoriaAll.jsx, se podría eliminar o dejar de referencia
+
+    getEntidadAll:()=>axios.get(`${base_api_url}/admin/entidad`),
 }

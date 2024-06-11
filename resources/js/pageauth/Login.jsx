@@ -69,7 +69,7 @@ const Login = () => {
                         <input
                             className="w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
                             type="email"
-                            placeholder="Email"
+                            placeholder="Email@ejemplo.com"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
                             required
@@ -89,7 +89,7 @@ const Login = () => {
 
                     <div className="mb-6">
                         <button
-                            className="w-full px-4 py-2 font-bold text-white bg-green-500 rounded hover:bg-green-700 focus:outline-none focus:shadow-outline"
+                            className="w-full px-4 py-2 font-bold text-white bg-[#77BF45] rounded hover:bg-green-500 focus:outline-none focus:shadow-outline"
                             type="button"
                             onClick={submitLogin}
                         >

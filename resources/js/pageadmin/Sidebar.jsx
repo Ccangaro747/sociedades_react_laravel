@@ -18,7 +18,7 @@ const Sidebar = () => {
                     Categoría
                 </NavLink>
                 <NavLink
-                    to={`/admin/empresa`}
+                    to={`/admin/entidad`}
                     className="block max-w-xs p-6 mx-auto my-2 space-y-3 text-black no-underline transition duration-500 ease-in-out transform bg-white rounded-lg shadow-lg group ring-1 hover:scale-105"
                 >
                     Entidad
