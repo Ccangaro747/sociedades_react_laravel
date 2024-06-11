@@ -11,7 +11,7 @@ class EntidadController extends Controller
 {
     public function index()
     {
-        $data = Entidad::orderBy("orden")->get(["id", "nombre"]);
+        $data = Entidad::orderBy("orden")->get(["id", "orden", "nombre"]);
         return response()->json($data, 200);
     }
 

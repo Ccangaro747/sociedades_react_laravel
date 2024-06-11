@@ -81,7 +81,7 @@ const CategoriaAll = () => {
                     <table className="w-full table-auto">
                         <thead>
                             <tr className="text-left">
-                                <th className="px-4 py-2">ID</th>
+                                <th className="px-4 py-2">ORDEN</th>
                                 <th className="px-4 py-2">NAME</th>
                                 <th className="px-4 py-2">ACCION</th>
                             </tr>
