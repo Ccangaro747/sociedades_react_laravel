@@ -28,6 +28,7 @@ import CategoriaAll from "./pageadmin/CategoriaAll";
 import CategoriaStore from "./pageadmin/CategoriaStore";
 import CategoriaUpdate from "./pageadmin/CategoriaUpdate";
 import EntidadAll from "./pageadmin/EntidadAll";
+import EntidadUpdate from "./pageadmin/EntidadUpdate";
 
 // Creamos un componente para redirigir al usuario a "/admin/user"
 const RedirectToUser = () => {
@@ -57,6 +58,7 @@ const App = () => {
                         <Route path="categoria/create" element={<CategoriaStore />} />
                         <Route path='categoria/edit/:id' element={<CategoriaUpdate/>} />
                         <Route path='entidad' element={<EntidadAll/>} />
+                        <Route path="entidad/edit/:id" element={<EntidadUpdate />} />
                     </Route>
                     <Route path="/client" element={<LayoutClient />}>
                         <Route index element={<PageHome />} />
