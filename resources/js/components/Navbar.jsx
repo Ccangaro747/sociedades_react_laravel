@@ -3,7 +3,7 @@ import axios from 'axios';  // Importar axios
 import AuthUser from "../pageauth/AuthUser";
 
 const Navbar = () => {
-    const { getRol, getLogout, getToken } = AuthUser();
+    const { getRol, getLogout, getToken, user} = AuthUser();
 
     // Definimos una función llamada 'logoutUser'
     const logoutUser = () => {
@@ -41,7 +41,7 @@ const Navbar = () => {
                         className="inline-block px-4 py-2 text-gray-600 no-underline hover:text-gray-200 hover:text-underline"
                         href={`/${getRol()}`}
                     >
-                        Administración
+                        Administración | {user.name}
                     </a>
                 </li>,
                 // Enlace para cerrar la sesión del usuario. Al hacer clic en este enlace,

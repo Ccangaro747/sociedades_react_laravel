@@ -19,7 +19,6 @@ import { BrowserRouter as Router, Route, Routes, useNavigate } from "react-route
 import Login from "./pageauth/Login";
 import Register from "./pageauth/Register";
 import PanelAdmin from "./pageadmin/PanelAdmin";
-import PageClient from "./pageclient/PageClient";
 
 // Importamos las páginas para el rol ADMIN
 import UserAll from "./pageadmin/UserAll";
@@ -29,6 +28,9 @@ import CategoriaStore from "./pageadmin/CategoriaStore";
 import CategoriaUpdate from "./pageadmin/CategoriaUpdate";
 import EntidadAll from "./pageadmin/EntidadAll";
 import EntidadUpdate from "./pageadmin/EntidadUpdate";
+
+// Importamos las páginas para el rol CLIENT
+import PanelClient from "./pageclient/PanelClient";
 
 // Creamos un componente para redirigir al usuario a "/admin/user"
 const RedirectToUser = () => {
@@ -61,8 +63,7 @@ const App = () => {
                         <Route path="entidad/edit/:id" element={<EntidadUpdate />} />
                     </Route>
                     <Route path="/client" element={<LayoutClient />}>
-                        <Route index element={<PageHome />} />
-                        <Route index element={<PageClient />} />
+                        <Route index element={<PanelClient />} />
                     </Route>
                 </Route>
             </Routes>
