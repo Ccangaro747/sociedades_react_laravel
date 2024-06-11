@@ -64,6 +64,7 @@ const App = () => {
                     </Route>
                     <Route path="/client" element={<LayoutClient />}>
                         <Route index element={<PanelClient />} />
+                        <Route index element={<PageHome />} />
                     </Route>
                 </Route>
             </Routes>
