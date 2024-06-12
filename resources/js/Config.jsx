@@ -27,5 +27,6 @@ export default{
     getEntidadUpdate:(data,id)=>axios.put(`${base_api_url}/admin/entidad/${id}`,data), //Se crea en el EntidadUpdate.jsx, se podría eliminar o dejar de referencia
 
     // Rol Client
-    getEntidadAllClient:()=>axios.get(`${base_api_url}/client/entidad`),
+    getEntidadAllClient:()=>axios.get(`${base_api_url}/client/entidad`), //Se crea en el EntidadAll.jsx --> pageclient, se podría eliminar o dejar de referencia
+    getEntidadStoreClient:(data)=>axios.post(`${base_api_url}/client/entidad`,data),
 }

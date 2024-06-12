@@ -37,6 +37,7 @@ import EntidadUpdate from "./pageadmin/EntidadUpdate";
 // Importamos las páginas para el rol CLIENT
 import PanelClient from "./pageclient/PanelClient";
 import EntidadAllClient from "./pageclient/EntidadAll";
+import EntidadStoreClient from "./pageclient/EntidadStore";
 
 // Creamos un componente para redirigir al usuario a "/admin/user"
 const RedirectToUser = () => {
@@ -88,7 +89,10 @@ const App = () => {
                     <Route path="/client" element={<LayoutClient />}>
                         <Route index element={<RedirectToClientEntity />} />
                         <Route path="entidad" element={<EntidadAllClient />} />
-
+                        <Route
+                            path="entidad/create"
+                            element={<EntidadStoreClient/>}
+                        />
                     </Route>
                 </Route>
             </Routes>
