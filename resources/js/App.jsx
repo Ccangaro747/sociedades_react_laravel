@@ -13,7 +13,12 @@ import PageHome from "./pagepublic/PageHome";
 import ProtectedRoutes from "./pageauth/ProtectedRoutes";
 
 // Importamos los componentes de react-router-dom y el hook useNavigate
-import { BrowserRouter as Router, Route, Routes, useNavigate } from "react-router-dom";
+import {
+    BrowserRouter as Router,
+    Route,
+    Routes,
+    useNavigate,
+} from "react-router-dom";
 
 // Importamos las páginas de autenticación
 import Login from "./pageauth/Login";
@@ -41,6 +46,14 @@ const RedirectToUser = () => {
     }, [navigate]);
     return null;
 };
+// Creamos un componente para redirigir al usuario a "/client/entidad"
+const RedirectToClientEntity = () => {
+    let navigate = useNavigate();
+    React.useEffect(() => {
+        navigate("/client/entidad");
+    }, [navigate]);
+    return null;
+};
 
 // Definimos el componente principal de la aplicación
 const App = () => {
@@ -58,15 +71,24 @@ const App = () => {
                         <Route path="user" element={<UserAll />} />
                         <Route path="user/edit/:id" element={<UserUpdate />} />
                         <Route path="categoria" element={<CategoriaAll />} />
-                        <Route path="categoria/create" element={<CategoriaStore />} />
-                        <Route path='categoria/edit/:id' element={<CategoriaUpdate/>} />
-                        <Route path='entidad' element={<EntidadAll/>} />
-                        <Route path="entidad/edit/:id" element={<EntidadUpdate />} />
+                        <Route
+                            path="categoria/create"
+                            element={<CategoriaStore />}
+                        />
+                        <Route
+                            path="categoria/edit/:id"
+                            element={<CategoriaUpdate />}
+                        />
+                        <Route path="entidad" element={<EntidadAll />} />
+                        <Route
+                            path="entidad/edit/:id"
+                            element={<EntidadUpdate />}
+                        />
                     </Route>
                     <Route path="/client" element={<LayoutClient />}>
-                        <Route index element={<PanelClient />} />
-                        <Route path='entidad' element={<EntidadAllClient/>} />
-                        <Route index element={<PageHome />} />
+                        <Route index element={<RedirectToClientEntity />} />
+                        <Route path="entidad" element={<EntidadAllClient />} />
+
                     </Route>
                 </Route>
             </Routes>
