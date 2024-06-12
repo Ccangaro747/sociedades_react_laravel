@@ -21,7 +21,7 @@ const EntidadAll = () => {
         const token = getToken();
         try {
             const response = await axios.get(
-                "http://localhost:8000/api/v1/admin/entidad",
+                "http://localhost:8000/api/v1/client/entidad",
                 {
                     headers: {
                         Authorization: `Bearer ${token}`,
@@ -52,7 +52,7 @@ const EntidadAll = () => {
             const token = getToken();
             try {
                 await axios.delete(
-                    `http://localhost:8000/api/v1/admin/entidad/${id}`,
+                    `http://localhost:8000/api/v1/client/entidad/${id}`,
                     {
                         headers: {
                             Authorization: `Bearer ${token}`,
@@ -104,7 +104,7 @@ const EntidadAll = () => {
                                         <td className="px-4 py-2 border">
                                             <button className="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-green-600 border border-transparent rounded-md hover:bg-green-700">
                                                 <Link
-                                                    to={`/admin/entidad/edit/${entidad.id}`}
+                                                    to={`/client/entidad/edit/${entidad.id}`}
                                                     className="text-white no-underline"
                                                 >
                                                     Editar

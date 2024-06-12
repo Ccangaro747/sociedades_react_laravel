@@ -23,6 +23,9 @@ export default{
     getCategoriaDeleteById:(id)=>axios.delete(`${base_api_url}/admin/categoria/${id}`), //Se crea en el CategoriaAll.jsx, se podría eliminar o dejar de referencia
 
     getEntidadAll:()=>axios.get(`${base_api_url}/admin/entidad`), //Se crea en el EntidadAll.jsx, se podría eliminar o dejar de referencia
-    getEntidadById:(id)=>axios.get(`${base_api_url}/admin/entidad/${id}`),
-    getEntidadUpdate:(data,id)=>axios.put(`${base_api_url}/admin/entidad/${id}`,data),
+    getEntidadById:(id)=>axios.get(`${base_api_url}/admin/entidad/${id}`), //Se crea en el EntidadUpdate.jsx, se podría eliminar o dejar de referencia
+    getEntidadUpdate:(data,id)=>axios.put(`${base_api_url}/admin/entidad/${id}`,data), //Se crea en el EntidadUpdate.jsx, se podría eliminar o dejar de referencia
+
+    // Rol Client
+    getEntidadAllClient:()=>axios.get(`${base_api_url}/client/entidad`),
 }

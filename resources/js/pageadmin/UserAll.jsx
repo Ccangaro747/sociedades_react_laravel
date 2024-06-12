@@ -52,36 +52,49 @@ const UserAll = () => {
                 <Sidebar />
                 <div className="p-6 sm:w-9/12">
                     <table className="w-full table-auto">
-                    <thead>
-  <tr>
-    <th className="px-4 py-2">ID</th>
-    <th className="px-4 py-2">NAME</th>
-    <th className="px-4 py-2">ACCION</th>
-  </tr>
-</thead>
-<tbody>
-  {!currentUsers.length ? (
-    <tr>
-      <td colSpan="3">
-        <div className="flex justify-center">
-          <BeatLoader color="#32CD32" loading={true} size={15} />
-        </div>
-      </td>
-    </tr>
-  ) : (
-    currentUsers.map((user, index) => (
-      <tr key={index}>
-        <td className="px-4 py-2 border">{user.id}</td>
-        <td className="px-4 py-2 border">{user.name}</td>
-        <td className="px-4 py-2 border">
-          <button className="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-green-600 border border-transparent rounded-md hover:bg-green-700">
-            <Link to={`/admin/user/edit/${user.id}`} className="text-white no-underline">Editar</Link>
-          </button>
-        </td>
-      </tr>
-    ))
-  )}
-</tbody>
+                        <thead>
+                            <tr>
+                                <th className="px-4 py-2">ID</th>
+                                <th className="px-4 py-2">NAME</th>
+                                <th className="px-4 py-2">ACCION</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {!currentUsers.length ? (
+                                <tr>
+                                    <td colSpan="3">
+                                        <div className="flex justify-center">
+                                            <BeatLoader
+                                                color="#32CD32"
+                                                loading={true}
+                                                size={15}
+                                            />
+                                        </div>
+                                    </td>
+                                </tr>
+                            ) : (
+                                currentUsers.map((user, index) => (
+                                    <tr key={index}>
+                                        <td className="px-4 py-2 border">
+                                            {user.id}
+                                        </td>
+                                        <td className="px-4 py-2 border">
+                                            {user.name}
+                                        </td>
+                                        <td className="px-4 py-2 border">
+                                            <button className="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-green-600 border border-transparent rounded-md hover:bg-green-700">
+                                                <Link
+                                                    to={`/admin/user/edit/${user.id}`}
+                                                    className="text-white no-underline"
+                                                >
+                                                    Editar
+                                                </Link>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                ))
+                            )}
+                        </tbody>
                     </table>
                     <ReactPaginate
                         previousLabel={"Anterior"}
