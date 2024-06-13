@@ -42,7 +42,7 @@ const Login = () => {
                     );
                     navigate("/");
                 } else {
-                    setMessage("Error al iniciar sesión");
+                    setMessage("Usuario y/o contraseña incorrecta");
                 }
             }).catch((error) => {
                 console.error('Error al iniciar sesión:', error);

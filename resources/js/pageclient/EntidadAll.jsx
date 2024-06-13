@@ -71,6 +71,12 @@ const EntidadAll = () => {
             <div className="container flex flex-col-reverse mx-auto overflow-hidden bg-white rounded-lg shadow-lg sm:flex-row">
                 <Sidebar />
                 <div className="p-6 sm:w-9/12">
+                <Link
+                        to={"/client/entidad/create"}
+                        className="inline-block px-4 py-2 text-white no-underline bg-blue-500 rounded hover:bg-blue-700"
+                    >
+                        Crear Entidad
+                    </Link>
                     <table className="w-full table-auto">
                         <thead>
                             <tr className="text-left">
