@@ -1,11 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Sidebar from "./Sidebar";
 import AuthUser from "../pageauth/AuthUser";
 import { Link, useNavigate } from "react-router-dom";
-import Select from "../components/Select";
+import Select from "../components/Select"; // Componente no utilizado, implementación realizada directamente en este componente.
 
 const EntidadStore = () => {
+    const [categorias, setCategorias] = useState([]);
     const [nombre, setNombre] = useState("");
     const [email, setEmail] = useState("");
     const [descripcion, setDescripcion] = useState("");
@@ -19,7 +20,24 @@ const EntidadStore = () => {
     const navigate = useNavigate();
     const { getToken } = AuthUser();
 
-    const handleInputChange = async (e) => {
+    useEffect(() => {
+        const fetchData = async () => {
+            const token = getToken();
+            try {
+                const result = await axios.get(
+                    'http://localhost:8000/api/v1/admin/categoria',
+                    { headers: { Authorization: `Bearer ${token}` } }
+                );
+                setCategorias(result.data);
+            } catch (error) {
+                console.error("Error al obtener las categorías:", error);
+            }
+        };
+
+        fetchData();
+    }, []);
+
+    const handleInputChange = (e) => {
         let files = e.target.files;
         let reader = new FileReader();
         reader.readAsDataURL(files[0]);
@@ -27,9 +45,11 @@ const EntidadStore = () => {
             setUrlfoto(e.target.result);
         };
     };
+
     const getCategoriaId = (v) => {
         setCategoria_id(v);
     };
+
     const submitStore = async (e) => {
         e.preventDefault();
         const token = getToken();
@@ -47,7 +67,7 @@ const EntidadStore = () => {
         formData.append("facebook", facebook);
 
         try {
-            await axios.post(`${base_api_url}/client/entidad`, formData, {
+            await axios.post(`http://localhost:8000/api/v1/client/entidad`, formData, {
                 headers: {
                     "Content-Type": "multipart/form-data",
                     Authorization: `Bearer ${token}`,
@@ -58,8 +78,9 @@ const EntidadStore = () => {
             console.error("Error al crear la entidad:", error);
         }
     };
+
     return (
-        <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 sm:flex-row ">
+        <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 sm:flex-row">
             <div className="container flex flex-col-reverse mx-auto mt-5 overflow-hidden bg-white rounded-lg shadow-lg sm:flex-row">
                 <Sidebar />
                 <div className="p-6 sm:w-9/12">
@@ -116,7 +137,20 @@ const EntidadStore = () => {
                             </div>
                             <div className="mb-3">
                                 <label>Categoria</label>
-                                    <Select selected={getCategoriaId} />
+                                <select
+                                    className="form-control"
+                                    onChange={(e) => getCategoriaId(e.target.value)}
+                                >
+                                    <option value="">Seleccionar Categoría</option>
+                                    {categorias.map((categoria) => (
+                                        <option
+                                            key={categoria.id}
+                                            value={categoria.id}
+                                        >
+                                            {categoria.nombre}
+                                        </option>
+                                    ))}
+                                </select>
                             </div>
                             <div className="mb-3">
                                 <label>Web</label>
@@ -152,7 +186,7 @@ const EntidadStore = () => {
                             <input
                                 className="form-control"
                                 type="file"
-                                onChange={(e) => handleInputChange(e)}
+                                onChange={handleInputChange}
                             />
                         </div>
                         <div className="flex mt-3 space-x-4">
