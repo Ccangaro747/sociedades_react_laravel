@@ -28,5 +28,5 @@ export default{
 
     // Rol Client
     getEntidadAllClient:()=>axios.get(`${base_api_url}/client/entidad`), //Se crea en el EntidadAll.jsx --> pageclient, se podría eliminar o dejar de referencia
-    getEntidadStoreClient:(data)=>axios.post(`${base_api_url}/client/entidad`,data),
+    getEntidadStoreClient:(data)=>axios.post(`${base_api_url}/client/entidad`,data), //Se crea en el EntidadStore.jsx --> pageclient, se podría eliminar o dejar de referencia
 }
