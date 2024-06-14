@@ -30,6 +30,7 @@ class EntidadController extends Controller
             //Se guarda el nombre de la imagen en la base de datos
             $data->urlfoto  =   Str::slug($request->nombre) . '.' . $image_type;
         }
+        $data->user_id = auth()->user()->id;
         $data->save();
         return response()->json($data, 200);
     }
