@@ -130,30 +130,30 @@ const CategoriaUpdate = () => {
                             />
                         </div>
                         <div className="mt-3">
-    <label htmlFor="file">Imagen:</label>
-    {formData.file && (
-        <img
-            src={formData.file}
-            alt="Vista previa"
-            className="img-fluid img-thumbnail"
-        />
-    )}
-    <input
-        className="form-control"
-        type="file"
-        name="file"
-        onChange={(e) => {
-            const reader = new FileReader();
-            reader.onloadend = () => {
-                setFormData({
-                    ...formData,
-                    file: reader.result,
-                });
-            };
-            reader.readAsDataURL(e.target.files[0]);
-        }}
-    />
-</div>
+                            <label htmlFor="file">Imagen:</label>
+                            {formData.file && (
+                                <img
+                                    src={formData.file}
+                                    alt="Vista previa"
+                                    className="img-fluid img-thumbnail"
+                                />
+                            )}
+                            <input
+                                className="form-control"
+                                type="file"
+                                name="file"
+                                onChange={(e) => {
+                                    const reader = new FileReader();
+                                    reader.onloadend = () => {
+                                        setFormData({
+                                            ...formData,
+                                            file: reader.result,
+                                        });
+                                    };
+                                    reader.readAsDataURL(e.target.files[0]);
+                                }}
+                            />
+                        </div>
                         <div className="flex mt-3 space-x-4">
                             <Link
                                 to={-1}

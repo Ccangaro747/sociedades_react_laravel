@@ -10,12 +10,12 @@ const EntidadAll = () => {
     const [entidades, setEntidades] = useState([]);
     const [currentPage, setCurrentPage] = useState(0);
     const entidadesPerPage = 4;
-
     const { getToken } = AuthUser();
+    const [reloadData, setReloadData] = useState(false); // Estado para forzar la recarga de datos
 
     useEffect(() => {
         getEntidadAll();
-    }, []);
+    }, [reloadData]); // Recargar datos cuando reloadData cambie
 
     const getEntidadAll = async () => {
         const token = getToken();
@@ -28,7 +28,6 @@ const EntidadAll = () => {
                     },
                 },
             );
-
             setEntidades(response.data);
         } catch (error) {
             console.error("Error al obtener las entidades:", error);
@@ -59,7 +58,7 @@ const EntidadAll = () => {
                         },
                     },
                 );
-                getEntidadAll();
+                setReloadData(!reloadData); // Forzar recarga de datos
             } catch (error) {
                 console.error("Error al eliminar la entidad:", error);
             }
@@ -71,7 +70,7 @@ const EntidadAll = () => {
             <div className="container flex flex-col-reverse mx-auto overflow-hidden bg-white rounded-lg shadow-lg sm:flex-row">
                 <Sidebar />
                 <div className="p-6 sm:w-9/12">
-                <Link
+                    <Link
                         to={"/client/entidad/create"}
                         className="inline-block px-4 py-2 text-white no-underline bg-blue-500 rounded hover:bg-blue-700"
                     >
@@ -124,9 +123,7 @@ const EntidadAll = () => {
                                                     )
                                                 }
                                             >
-                                                <Link className="text-white no-underline">
-                                                    Eliminar
-                                                </Link>
+                                                Eliminar
                                             </button>
                                         </td>
                                     </tr>

@@ -44,7 +44,16 @@ class EntidadController extends Controller
         //Acá se puede realizar una validación de los datos que llegan en la petición si es necesario...
         //Ej; $request->validate(['nombre' => 'required']);
         $data = Entidad::find($id);
-        $data->fill($request->all());
+        //$data->fill($request->all());
+        $data->nombre = $request->nombre;
+        $data->telefono = $request->telefono;
+        $data->direccion = $request->direccion;
+        $data->email = $request->email;
+        $data->descripcion = $request->descripcion;
+        $data->orden = $request->orden;
+        $data->categoria_id = $request->categoria_id;
+        $data->website = $request->website;
+        $data->facebook = $request->facebook;
         //Upload image base64
         if ($request->urlfoto) {
             $img = $request->urlfoto;

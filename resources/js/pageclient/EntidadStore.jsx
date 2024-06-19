@@ -81,7 +81,7 @@ const EntidadStore = () => {
 
     return (
         <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 sm:flex-row">
-            <div className="container flex flex-col-reverse mx-auto mt-5 overflow-hidden bg-white rounded-lg shadow-lg sm:flex-row">
+            <div className="container flex flex-col-reverse mx-auto mt-5 mb-5 overflow-hidden bg-white rounded-lg shadow-lg sm:flex-row">
                 <Sidebar />
                 <div className="p-6 sm:w-9/12">
                     <form onSubmit={submitStore}>
