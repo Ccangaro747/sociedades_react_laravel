@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
@@ -310,10 +309,10 @@ const EntidadUpdate = () => {
                             Guardar cambios
                         </button>
                         <Link
-                            to="/client/entidad"
-                            className="inline-block px-4 py-2 ml-4 text-sm font-medium text-gray-700 border border-gray-300 rounded-md hover:bg-gray-50"
+                            to={-1}
+                            className="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-gray-600 border border-transparent rounded-md hover:bg-gray-700"
                         >
-                            Cancelar
+                            ← Back
                         </Link>
                     </form>
                 </div>
@@ -323,8 +322,3 @@ const EntidadUpdate = () => {
 };
 
 export default EntidadUpdate;
-
-
-
-
-

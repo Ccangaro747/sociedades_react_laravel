@@ -58,7 +58,7 @@ const EntidadAll = () => {
                         },
                     },
                 );
-                setReloadData(!reloadData); // Forzar recarga de datos
+                setReloadData(!reloadData); // Forzar la recarga de datos
             } catch (error) {
                 console.error("Error al eliminar la entidad:", error);
             }
