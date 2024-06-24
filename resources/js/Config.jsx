@@ -29,13 +29,13 @@ export default{
     // Rol Client
     getEntidadAllClient:()=>axios.get(`${base_api_url}/client/entidad`), //Se crea en el EntidadAll.jsx --> pageclient, se podría eliminar o dejar de referencia
     getEntidadStoreClient:(data)=>axios.post(`${base_api_url}/client/entidad`,data), //Se crea en el EntidadStore.jsx --> pageclient, se podría eliminar o dejar de referencia
-<<<<<<< HEAD
+
 
     getEntidadByIdClient:(id)=>axios.get(`${base_api_url}/client/entidad/${id}`),
     getEntidadUpdate:(data,id)=>axios.put(`${base_api_url}/client/entidad/${id}`,data),
-=======
+
     getEntidadByIdClient:(id)=>axios.get(`${base_api_url}/client/entidad/${id}`),
     getEntidadUpdateClient:(data,id)=>axios.put(`${base_api_url}/client/entidad/${id}`,data),
 
->>>>>>> temp-branch
+
 }

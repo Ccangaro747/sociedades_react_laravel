@@ -81,13 +81,11 @@ const App = () => {
                     <Route path="/client" element={<LayoutClient />}>
                         <Route index element={<RedirectToClientEntity />} />
                         <Route path="entidad" element={<EntidadAllClient />} />
-<<<<<<< HEAD
+
                         <Route path="entidad/create" element={<EntidadStoreClient/>}/>
                         <Route path='entidad/edit/:id' element={<EntidadUpdateClient/>} />
-=======
                         <Route path="entidad/create" element={<EntidadStoreClient/>} />
                         <Route path="entidad/edit/:id" element={<EntidadUpdateClient />}/>
->>>>>>> temp-branch
                     </Route>
                 </Route>
             </Routes>
