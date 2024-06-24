@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import Sidebar from "./Sidebar";
@@ -9,102 +9,84 @@ const EntidadUpdate = () => {
     const navigate = useNavigate();
     const { id } = useParams();
     const { getToken } = AuthUser();
-    const [categorias, setCategorias] = useState([]);
-    const [nombre, setNombre] = useState("");
-    const [email, setEmail] = useState("");
-    const [descripcion, setDescripcion] = useState("");
-    const [telefono, setTelefono] = useState("");
-    const [direccion, setDireccion] = useState("");
-    const [website, setWebsite] = useState("");
-    const [facebook, setFacebook] = useState("");
-    const [orden, setOrden] = useState("");
-    const [urlfoto, setUrlfoto] = useState("");
-    const [categoria_id, setCategoria_id] = useState("");
-    const [file, setFile] = useState("");
+
+    const [formData, setFormData] = useState({
+        nombre: "",
+        email: "",
+        orden: 0,
+        descripcion: "",
+        telefono: "",
+        direccion: "",
+        website: "",
+        facebook: "",
+        urlfoto: "",
+        categoria_id: "",
+        file: null,
+    });
+    const [error, setError] = useState("");
 
     useEffect(() => {
-        const fetchData = async () => {
-            const token = getToken();
-            try {
-                const result = await axios.get(
-                    `http://localhost:8000/api/v1/admin/categoria`,
-                    {
-                        headers: { Authorization: `Bearer ${token}` },
+        getEntidadById();
+    }, []);
+
+    const getEntidadById = async () => {
+        const token = getToken();
+        try {
+            const response = await axios.get(
+                `http://localhost:8000/api/v1/client/entidad/${id}`,
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
                     },
-                );
-                setCategorias(result.data);
-            } catch (error) {
-                console.error("Error al obtener las categorías:", error);
-            }
-        };
-
-        fetchData();
-    }, [getToken]);
-
-    useEffect(() => {
-        const fetchEntidad = async () => {
-            const token = getToken();
-            try {
-                const { data } = await axios.get(
-                    `http://localhost:8000/api/v1/client/entidad/${id}`,
-                    {
-                        headers: { Authorization: `Bearer ${token}` },
-                    },
-                );
-                setNombre(data.nombre);
-                setEmail(data.email);
-                setOrden(data.orden);
-                setDescripcion(data.descripcion);
-                setTelefono(data.telefono);
-                setDireccion(data.direccion);
-                setWebsite(data.website);
-                setFacebook(data.facebook);
-                setUrlfoto(data.urlfoto);
-                setCategoria_id(data.categoria_id);
-            } catch (error) {
-                console.error("Error al obtener la entidad:", error);
-            }
-        };
-
-        fetchEntidad();
-    }, [id, getToken]);
-
-    const handleInputChange = (e) => {
-        let files = e.target.files;
-        let reader = new FileReader();
-        reader.readAsDataURL(files[0]);
-        reader.onload = (e) => {
-            setUrlfoto(e.target.result);
-        };
+                },
+            );
+            const { data } = response;
+            setFormData({
+                nombre: data.nombre,
+                email: data.email,
+                orden: data.orden,
+                descripcion: data.descripcion,
+                telefono: data.telefono,
+                direccion: data.direccion,
+                website: data.website,
+                facebook: data.facebook,
+                urlfoto: data.urlfoto,
+                categoria_id: data.categoria_id,
+                file: null,
+            });
+        } catch (error) {
+            setError("Error al obtener la entidad.");
+            console.error("Error al obtener la entidad:", error);
+        }
     };
 
-    const getCategoriaId = (v) => {
-        setCategoria_id(v);
+    const handleInputChange = (e) => {
+        setFormData({
+            ...formData,
+            [e.target.name]: e.target.value,
+        });
+    };
+
+    const handleFileChange = (e) => {
+        const reader = new FileReader();
+        reader.onloadend = () => {
+            setFormData({
+                ...formData,
+                file: reader.result,
+            });
+        };
+        reader.readAsDataURL(e.target.files[0]);
     };
 
     const submitUpdate = async (ev) => {
         ev.preventDefault();
         const token = getToken();
-
-        let formData = new FormData();
-        formData.append("nombre", nombre);
-        formData.append("descripcion", descripcion);
-        formData.append("orden", orden);
-        formData.append("urlfoto", urlfoto);
-        formData.append("categoria_id", categoria_id);
-        formData.append("email", email);
-        formData.append("telefono", telefono);
-        formData.append("direccion", direccion);
-        formData.append("website", website);
-        formData.append("facebook", facebook);
-
         try {
             await axios.put(
                 `http://localhost:8000/api/v1/client/entidad/${id}`,
                 formData,
                 {
                     headers: {
-                        "Content-Type": "multipart/form-data",
                         Authorization: `Bearer ${token}`,
                     },
                 },
@@ -112,6 +94,7 @@ const EntidadUpdate = () => {
             navigate("/client/entidad");
         } catch (error) {
             console.error("Error al actualizar la entidad:", error);
+            setError(error.message);
         }
     };
 
@@ -120,200 +103,137 @@ const EntidadUpdate = () => {
             <div className="container flex flex-col-reverse mx-auto mt-5 mb-5 overflow-hidden bg-white rounded-lg shadow-lg sm:flex-row">
                 <Sidebar />
                 <div className="p-6 sm:w-9/12">
-                    <form onSubmit={submitUpdate}>
-                        <div className="mb-4">
-                            <label
-                                htmlFor="nombre"
-                                className="block mb-2 text-sm font-bold text-gray-700"
-                            >
-                                Nombre
-                            </label>
-                            <input
-                                type="text"
-                                id="nombre"
-                                name="nombre"
-                                value={nombre}
-                                onChange={(e) => setNombre(e.target.value)}
-                                className="w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
-                                required
-                            />
+                    {error && <div className="mb-4 text-red-500">{error}</div>}
+                    <form onSubmit={submitUpdate} className="w-full">
+                        <div className="mb-3">
+                            <div>
+                                <label htmlFor="nombre" className="sm:w-4/12">
+                                    Nombre:
+                                </label>
+                                <input
+                                    className="form-control"
+                                    type="text"
+                                    name="nombre"
+                                    value={formData.nombre}
+                                    onChange={handleInputChange}
+                                />
+                            </div>
+                            <div>
+                                <label className="block mb-1">Email</label>
+                                <input
+                                    className="form-control"
+                                    type="email"
+                                    name="email"
+                                    value={formData.email}
+                                    onChange={handleInputChange}
+                                />
+                            </div>
+                            <div>
+                                <label className="block mb-1">Teléfono</label>
+                                <input
+                                    className="form-control"
+                                    type="tel"
+                                    name="telefono"
+                                    value={formData.telefono}
+                                    onChange={handleInputChange}
+                                />
+                            </div>
+                            <div>
+                                <label className="block mb-1">Dirección</label>
+                                <input
+                                    className="form-control"
+                                    type="text"
+                                    name="direccion"
+                                    value={formData.direccion}
+                                    onChange={handleInputChange}
+                                />
+                            </div>
+                            <div>
+                                <label className="block mb-1">Orden</label>
+                                <input
+                                    className="form-control"
+                                    type="number"
+                                    name="orden"
+                                    value={formData.orden}
+                                    onChange={handleInputChange}
+                                />
+                            </div>
+                            <div>
+                                <label className="block mb-1">Categoría</label>
+                                <Select
+                                    selec={formData.categoria_id}
+                                    selected={(v) =>
+                                        setFormData({
+                                            ...formData,
+                                            categoria_id: v,
+                                        })
+                                    }
+                                />
+                            </div>
+                            <div>
+                                <label className="block mb-1">Website</label>
+                                <input
+                                    className="form-control"
+                                    type="url"
+                                    name="website"
+                                    value={formData.website}
+                                    onChange={handleInputChange}
+                                />
+                            </div>
+                            <div>
+                                <label className="block mb-1">Facebook</label>
+                                <input
+                                    className="form-control"
+                                    type="url"
+                                    name="facebook"
+                                    value={formData.facebook}
+                                    onChange={handleInputChange}
+                                />
+                            </div>
+                            <div className="col-span-2">
+                                <label className="block mb-1">
+                                    Descripción:
+                                </label>
+                                <textarea
+                                    className="form-control"
+                                    name="descripcion"
+                                    value={formData.descripcion}
+                                    onChange={handleInputChange}
+                                />
+                            </div>
+                            <div>
+                                <label className="block mb-1">Imagen:</label>
+                                {formData.urlfoto && (
+                                    <img
+                                        src={`/img/entidad/${formData.urlfoto}`}
+                                        loading="lazy"
+                                        width={200}
+                                        height={200}
+                                        className="img-fluid img-thumbnail"
+                                    />
+                                )}
+                                <input
+                                    className="w-full form-input"
+                                    type="file"
+                                    name="file"
+                                    onChange={handleFileChange}
+                                />
+                            </div>
                         </div>
-                        <div className="mb-4">
-                            <label
-                                htmlFor="descripcion"
-                                className="block mb-2 text-sm font-bold text-gray-700"
+                        <div className="flex mt-3 space-x-4">
+                            <Link
+                                to={-1}
+                                className="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-gray-600 border border-transparent rounded-md hover:bg-gray-700"
                             >
-                                Descripción
-                            </label>
-                            <textarea
-                                id="descripcion"
-                                name="descripcion"
-                                value={descripcion}
-                                onChange={(e) => setDescripcion(e.target.value)}
-                                className="w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
-                                rows="4"
-                                required
-                            />
-                        </div>
-                        <div className="mb-4">
-                            <label
-                                htmlFor="orden"
-                                className="block mb-2 text-sm font-bold text-gray-700"
+                                ← Back
+                            </Link>
+                            <button
+                                type="submit"
+                                className="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-green-600 border border-transparent rounded-md hover:bg-green-700"
                             >
-                                Orden
-                            </label>
-                            <input
-                                type="number"
-                                id="orden"
-                                name="orden"
-                                value={orden}
-                                onChange={(e) => setOrden(e.target.value)}
-                                className="w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
-                                required
-                            />
+                                Actualizar Entidad
+                            </button>
                         </div>
-                        <div className="mb-4">
-                            <label
-                                htmlFor="urlfoto"
-                                className="block mb-2 text-sm font-bold text-gray-700"
-                            >
-                                URL de Foto
-                            </label>
-                            <input
-                                type="text"
-                                id="urlfoto"
-                                name="urlfoto"
-                                value={urlfoto}
-                                onChange={(e) => setUrlfoto(e.target.value)}
-                                className="w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
-                                required
-                            />
-                        </div>
-                        <div className="mb-4">
-                            <label
-                                htmlFor="categoria"
-                                className="block mb-2 text-sm font-bold text-gray-700"
-                            >
-                                Categoría
-                            </label>
-                            <Select
-                                id="categoria"
-                                name="categoria"
-                                value={categoria_id}
-                                onChange={(e) => getCategoriaId(e.target.value)}
-                                options={categorias}
-                            />
-                        </div>
-                        <div className="mb-4">
-                            <label
-                                htmlFor="email"
-                                className="block mb-2 text-sm font-bold text-gray-700"
-                            >
-                                Email
-                            </label>
-                            <input
-                                type="email"
-                                id="email"
-                                name="email"
-                                value={email}
-                                onChange={(e) => setEmail(e.target.value)}
-                                className="w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
-                                required
-                            />
-                        </div>
-                        <div className="mb-4">
-                            <label
-                                htmlFor="telefono"
-                                className="block mb-2 text-sm font-bold text-gray-700"
-                            >
-                                Teléfono
-                            </label>
-                            <input
-                                type="tel"
-                                id="telefono"
-                                name="telefono"
-                                value={telefono}
-                                onChange={(e) => setTelefono(e.target.value)}
-                                className="w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
-                                required
-                            />
-                        </div>
-                        <div className="mb-4">
-                            <label
-                                htmlFor="direccion"
-                                className="block mb-2 text-sm font-bold text-gray-700"
-                            >
-                                Dirección
-                            </label>
-                            <input
-                                type="text"
-                                id="direccion"
-                                name="direccion"
-                                value={direccion}
-                                onChange={(e) => setDireccion(e.target.value)}
-                                className="w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
-                                required
-                            />
-                        </div>
-                        <div className="mb-4">
-                            <label
-                                htmlFor="website"
-                                className="block mb-2 text-sm font-bold text-gray-700"
-                            >
-                                Sitio Web
-                            </label>
-                            <input
-                                type="text"
-                                id="website"
-                                name="website"
-                                value={website}
-                                onChange={(e) => setWebsite(e.target.value)}
-                                className="w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
-                            />
-                        </div>
-                        <div className="mb-4">
-                            <label
-                                htmlFor="facebook"
-                                className="block mb-2 text-sm font-bold text-gray-700"
-                            >
-                                Facebook
-                            </label>
-                            <input
-                                type="text"
-                                id="facebook"
-                                name="facebook"
-                                value={facebook}
-                                onChange={(e) => setFacebook(e.target.value)}
-                                className="w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
-                            />
-                        </div>
-                        <div className="mb-4">
-                            <label
-                                htmlFor="file"
-                                className="block mb-2 text-sm font-bold text-gray-700"
-                            >
-                                Cargar Imagen
-                            </label>
-                            <input
-                                type="file"
-                                id="file"
-                                name="file"
-                                onChange={(e) => handleInputChange(e)}
-                                className="w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
-                            />
-                        </div>
-                        <button
-                            type="submit"
-                            className="px-4 py-2 text-sm font-medium text-white bg-green-600 border border-transparent rounded-md hover:bg-green-700"
-                        >
-                            Guardar cambios
-                        </button>
-                        <Link
-                            to={-1}
-                            className="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-gray-600 border border-transparent rounded-md hover:bg-gray-700"
-                        >
-                            ← Back
-                        </Link>
                     </form>
                 </div>
             </div>
