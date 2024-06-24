@@ -73,25 +73,21 @@ const App = () => {
                         <Route path="user" element={<UserAll />} />
                         <Route path="user/edit/:id" element={<UserUpdate />} />
                         <Route path="categoria" element={<CategoriaAll />} />
-                        <Route
-                            path="categoria/create"
-                            element={<CategoriaStore />}
-                        />
-                        <Route
-                            path="categoria/edit/:id"
-                            element={<CategoriaUpdate />}
-                        />
+                        <Route path="categoria/create" element={<CategoriaStore />} />
+                        <Route path="categoria/edit/:id" element={<CategoriaUpdate />} />
                         <Route path="entidad" element={<EntidadAll />} />
-                        <Route
-                            path="entidad/edit/:id"
-                            element={<EntidadUpdate />}
-                        />
+                        <Route path="entidad/edit/:id" element={<EntidadUpdate />}/>
                     </Route>
                     <Route path="/client" element={<LayoutClient />}>
                         <Route index element={<RedirectToClientEntity />} />
                         <Route path="entidad" element={<EntidadAllClient />} />
+<<<<<<< HEAD
                         <Route path="entidad/create" element={<EntidadStoreClient/>}/>
                         <Route path='entidad/edit/:id' element={<EntidadUpdateClient/>} />
+=======
+                        <Route path="entidad/create" element={<EntidadStoreClient/>} />
+                        <Route path="entidad/edit/:id" element={<EntidadUpdateClient />}/>
+>>>>>>> temp-branch
                     </Route>
                 </Route>
             </Routes>

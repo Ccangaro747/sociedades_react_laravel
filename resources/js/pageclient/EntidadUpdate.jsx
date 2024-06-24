@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
@@ -322,3 +323,14 @@ const EntidadUpdate = () => {
 };
 
 export default EntidadUpdate;
+=======
+import React from 'react'
+
+const EntidadUpdate = () => {
+  return (
+    <div>EntidadUpdate</div>
+  )
+}
+
+export default EntidadUpdate
+>>>>>>> temp-branch

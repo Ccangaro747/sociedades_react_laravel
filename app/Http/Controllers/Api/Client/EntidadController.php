@@ -6,9 +6,11 @@ use App\Http\Controllers\Controller;
 use App\Models\Entidad;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+
 class EntidadController extends Controller
 {
-    public function index(){
+    public function index()
+    {
         $data = Entidad::whereUser_id(auth()->user()->id)->orderBy("orden")->get(["id", "orden", "nombre"]);
         return response()->json($data, 200);
     }
@@ -39,11 +41,16 @@ class EntidadController extends Controller
         $data = Entidad::find($id);
         return response()->json($data, 200);
     }
+<<<<<<< HEAD
+=======
+
+>>>>>>> temp-branch
     public function update(Request $request, $id)
     {
         //Acá se puede realizar una validación de los datos que llegan en la petición si es necesario...
         //Ej; $request->validate(['nombre' => 'required']);
         $data = Entidad::find($id);
+<<<<<<< HEAD
         //$data->fill($request->all());
         $data->nombre = $request->nombre;
         $data->telefono = $request->telefono;
@@ -54,6 +61,9 @@ class EntidadController extends Controller
         $data->categoria_id = $request->categoria_id;
         $data->website = $request->website;
         $data->facebook = $request->facebook;
+=======
+        $data->fill($request->all());
+>>>>>>> temp-branch
         //Upload image base64
         if ($request->urlfoto) {
             $img = $request->urlfoto;
@@ -70,4 +80,14 @@ class EntidadController extends Controller
         $data->save();
         return response()->json($data, 200);
     }
+<<<<<<< HEAD
+=======
+
+    public function destroy($id)
+    {
+        $data = Entidad::find($id);
+        $data->delete();
+        return response()->json("Entidad eliminada", 200);
+    }
+>>>>>>> temp-branch
 }
