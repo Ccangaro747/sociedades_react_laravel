@@ -40,6 +40,14 @@ import EntidadAllClient from "./pageclient/EntidadAll";
 import EntidadStoreClient from "./pageclient/EntidadStore";
 import EntidadUpdateClient from "./pageclient/EntidadUpdate";
 
+// Importamos la página NotFound
+import NotFound from "./pagepublic/NotFound";
+
+// Importamos las páginas PUBLICAS
+import Categorias from "./pagepublic/Categorias";
+import Categoria from "./pagepublic/Categoria";
+
+
 // Creamos un componente para redirigir al usuario a "/admin/user"
 const RedirectToUser = () => {
     let navigate = useNavigate();
@@ -66,6 +74,9 @@ const App = () => {
                     <Route index element={<PageHome />} />
                     <Route path="/login" element={<Login />} />
                     <Route path="/register" element={<Register />} />
+                    <Route path="/*" element={<NotFound />} />
+                    <Route path='/categorias' element={<Categorias/>} />
+                    <Route path='/categorias/:slug' element={<Categoria/>} />
                 </Route>
                 <Route element={<ProtectedRoutes />}>
                     <Route path="/admin" element={<LayoutAdmin />}>
