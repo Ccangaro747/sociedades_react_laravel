@@ -42,16 +42,16 @@ const EntidadUpdate = () => {
             );
             const { data } = response;
             setFormData({
-                nombre: data.nombre,
-                email: data.email,
-                orden: data.orden,
-                descripcion: data.descripcion,
-                telefono: data.telefono,
-                direccion: data.direccion,
-                website: data.website,
-                facebook: data.facebook,
-                urlfoto: data.urlfoto,
-                categoria_id: data.categoria_id,
+                nombre: data.nombre || "",
+                email: data.email || "",
+                orden: data.orden || 0,
+                descripcion: data.descripcion || "",
+                telefono: data.telefono || "",
+                direccion: data.direccion || "",
+                website: data.website || "",
+                facebook: data.facebook || "",
+                urlfoto: data.urlfoto || "",
+                categoria_id: data.categoria_id || "",
                 file: null,
             });
         } catch (error) {
