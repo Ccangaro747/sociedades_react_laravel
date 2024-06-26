@@ -204,12 +204,11 @@ const EntidadUpdate = () => {
                             <div>
                                 <label className="block mb-1">Imagen:</label>
                                 {formData.urlfoto && (
-                                    <img
-                                        src={`/img/entidad/${formData.urlfoto}`}
-                                        loading="lazy"
+                                    <img src={`/img/entidad/${formData.urlfoto}`} loading="lazy"
                                         width={200}
                                         height={200}
                                         className="img-fluid img-thumbnail"
+                                        onError={(e) => e.target.src = '/img/nofoto.png'}
                                     />
                                 )}
                                 <input
