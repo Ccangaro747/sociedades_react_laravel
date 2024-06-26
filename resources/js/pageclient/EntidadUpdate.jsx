@@ -208,7 +208,7 @@ const EntidadUpdate = () => {
                                         width={200}
                                         height={200}
                                         className="img-fluid img-thumbnail"
-                                        onError={(e) => e.target.src = '/img/nofoto.png'}
+                                        onError={(e) => e.target.src = '/nofoto.png'}
                                     />
                                 )}
                                 <input
