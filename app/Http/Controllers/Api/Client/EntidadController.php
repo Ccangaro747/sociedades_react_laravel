@@ -47,11 +47,8 @@ class EntidadController extends Controller
 
     public function update(Request $request, $id)
     {
-        //Acá se puede realizar una validación de los datos que llegan en la petición si es necesario...
-        //Ej; $request->validate(['nombre' => 'required']);
+        // Valida y actualiza los campos de la entidad
         $data = Entidad::find($id);
-
-        //$data->fill($request->all());
         $data->nombre = $request->nombre;
         $data->telefono = $request->telefono;
         $data->direccion = $request->direccion;
@@ -62,24 +59,23 @@ class EntidadController extends Controller
         $data->website = $request->website;
         $data->facebook = $request->facebook;
 
-        $data->fill($request->all());
-
-        //Upload image base64
-        if ($request->urlfoto) {
-            $img = $request->urlfoto;
-            //Process image
-            $folderPath = "/img/categoria/";
+        // Procesa la imagen si se ha enviado una nueva
+        if ($request->file) {
+            $img = $request->file;
+            $folderPath = "/img/entidad/";
             $image_parts = explode(";base64,", $img);
             $image_type_aux = explode("image/", $image_parts[0]);
             $image_type = $image_type_aux[1];
             $image_base64 = base64_decode($image_parts[1]);
             $file = $folderPath . Str::slug($request->nombre) . '.' . $image_type;
             file_put_contents(public_path($file), $image_base64);
-            $data->urlfoto  =   Str::slug($request->nombre) . '.' . $image_type;
+            $data->urlfoto = Str::slug($request->nombre) . '.' . $image_type;
         }
+
         $data->save();
         return response()->json($data, 200);
     }
+
     public function destroy($id)
     {
         $data = Entidad::find($id);
