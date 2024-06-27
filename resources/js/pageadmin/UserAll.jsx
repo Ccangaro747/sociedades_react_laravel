@@ -55,7 +55,7 @@ const UserAll = () => {
                         <thead>
                             <tr>
                                 <th className="px-4 py-2">ID</th>
-                                <th className="px-4 py-2">NAME</th>
+                                <th className="px-4 py-2">NOMBRE</th>
                                 <th className="px-4 py-2">ACCION</th>
                             </tr>
                         </thead>
