@@ -29,9 +29,10 @@ export default{
     // Rol Client
     getEntidadAllClient:()=>axios.get(`${base_api_url}/client/entidad`), //Se crea en el EntidadAll.jsx --> pageclient, se podría eliminar o dejar de referencia
     getEntidadStoreClient:(data)=>axios.post(`${base_api_url}/client/entidad`,data), //Se crea en el EntidadStore.jsx --> pageclient, se podría eliminar o dejar de referencia
+    getEntidadByIdClient:(id)=>axios.get(`${base_api_url}/client/entidad/${id}`), //Se crea en el EntidadUpdate.jsx --> pageclient, se podría eliminar o dejar de referencia
+    getEntidadUpdateClient:(data,id)=>axios.put(`${base_api_url}/client/entidad/${id}`,data), //Se crea en el EntidadUpdate.jsx --> pageclient, se podría eliminar o dejar de referencia
 
-    getEntidadByIdClient:(id)=>axios.get(`${base_api_url}/client/entidad/${id}`),
-    getEntidadUpdateClient:(data,id)=>axios.put(`${base_api_url}/client/entidad/${id}`,data),
 
-
+    // Public
+    getEntidades:(data)=>axios.get(`${base_api_url}/public/entidades/${data}`),
 }

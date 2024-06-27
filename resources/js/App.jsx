@@ -9,7 +9,9 @@ import LayoutAdmin from "./layouts/LayoutAdmin";
 import LayoutClient from "./layouts/LayoutClient";
 
 // Importamos las páginas públicas
-import PageHome from "./pagepublic/PageHome";
+import Home from "./pagepublic/Home";
+import Categorias from "./pagepublic/Categorias";
+import Categoria from "./pagepublic/Categoria";
 import ProtectedRoutes from "./pageauth/ProtectedRoutes";
 
 // Importamos los componentes de react-router-dom y el hook useNavigate
@@ -43,9 +45,6 @@ import EntidadUpdateClient from "./pageclient/EntidadUpdate";
 // Importamos la página NotFound
 import NotFound from "./pagepublic/NotFound";
 
-// Importamos las páginas PUBLICAS
-import Categorias from "./pagepublic/Categorias";
-import Categoria from "./pagepublic/Categoria";
 
 
 // Creamos un componente para redirigir al usuario a "/admin/user"
@@ -71,10 +70,10 @@ const App = () => {
         <Router>
             <Routes>
                 <Route path="/" element={<LayoutPublic />}>
-                    <Route index element={<PageHome />} />
                     <Route path="/login" element={<Login />} />
                     <Route path="/register" element={<Register />} />
                     <Route path="/*" element={<NotFound />} />
+                    <Route index element={<Home />} />
                     <Route path='/categorias' element={<Categorias/>} />
                     <Route path='/categorias/:slug' element={<Categoria/>} />
                 </Route>
