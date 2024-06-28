@@ -27,6 +27,7 @@ Route::prefix('v1')->group(function () {
     Route::post('/auth/register', [AuthController::class, 'register']); // Esta ruta se utiliza para mostrar el formulario de registro en la parte pública de la aplicación. El controlador 'AuthController' y su método 'register' se encargan de procesar la solicitud.
     Route::post('/auth/login', [AuthController::class, 'login']); // Esta ruta se utiliza para mostrar el formulario de inicio de sesión en la parte pública de la aplicación. El controlador 'AuthController' y su método 'login' se encargan de procesar la solicitud.
 
+    //Rutas para el restablecimiento de contraseña
     Route::post('/auth/forgot-password', [AuthController::class, 'forgotPassword']);
     Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
     Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
