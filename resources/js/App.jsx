@@ -26,6 +26,7 @@ import {
 import Login from "./pageauth/Login";
 import Register from "./pageauth/Register";
 import PanelAdmin from "./pageadmin/PanelAdmin";
+import ForgotPassword from "./pageauth/ForgotPassword";
 
 // Importamos las páginas para el rol ADMIN
 import UserAll from "./pageadmin/UserAll";
@@ -44,6 +45,7 @@ import EntidadUpdateClient from "./pageclient/EntidadUpdate";
 
 // Importamos la página NotFound
 import NotFound from "./pagepublic/NotFound";
+
 
 
 
@@ -72,6 +74,7 @@ const App = () => {
                 <Route path="/" element={<LayoutPublic />}>
                     <Route path="/login" element={<Login />} />
                     <Route path="/register" element={<Register />} />
+                    <Route path="/forgot-password" element={<ForgotPassword />} />
                     <Route path="/*" element={<NotFound />} />
                     <Route index element={<Home />} />
                     <Route path='/categorias' element={<Categorias/>} />

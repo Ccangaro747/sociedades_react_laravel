@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom'; // Importa Link
 import AuthUser from './AuthUser';
 
 const Register = () => {
@@ -61,6 +61,9 @@ const Register = () => {
                     </div>
                     <div className="text-xs text-center">
                         Al registrarte, aceptas nuestros <a href="/terminos-y-condiciones" className="text-blue-500 underline">Términos y Condiciones</a>.
+                    </div>
+                    <div className="mt-4 text-xs text-center">
+                        <Link to="/forgot-password" className="text-blue-500 underline">Olvidé mi contraseña</Link> {/* Enlace a la página de recuperación */}
                     </div>
                 </form>
             </div>
