@@ -2,11 +2,14 @@ import React, { useEffect, useState } from "react";
 import Config from "../Config";
 import ReactPaginate from "react-paginate";
 import { BeatLoader } from "react-spinners";
+import Modal from "../components/Modal";
 
 const Home = () => {
     const [entidades, setEntidades] = useState([]);
     const [busqueda, setBusqueda] = useState("");
     const [currentPage, setCurrentPage] = useState(0);
+    const [showModal, setShowModal] = useState(false);
+    const [modalEntidad, setModalEntidad] = useState(null);
     const entidadesPerPage = 5;
 
     useEffect(() => {
@@ -27,13 +30,22 @@ const Home = () => {
     };
 
     const entidadesFiltradas = entidades.filter((entidad) =>
-        entidad.nombre.toLowerCase().includes(busqueda.toLowerCase()),
+        entidad.nombre.toLowerCase().includes(busqueda.toLowerCase())
     );
 
     const currentEntidades = entidadesFiltradas.slice(
         currentPage * entidadesPerPage,
-        (currentPage + 1) * entidadesPerPage,
+        (currentPage + 1) * entidadesPerPage
     );
+
+    const openModal = (entidad) => {
+        setModalEntidad(entidad);
+        setShowModal(true);
+    };
+
+    const closeModal = () => {
+        setShowModal(false);
+    };
 
     return (
         <div className="container pt-20 pb-20 mx-auto">
@@ -65,7 +77,11 @@ const Home = () => {
                                 </div>
                             ) : (
                                 currentEntidades.map((entidad) => (
-                                    <div className="mt-6" key={entidad.id}>
+                                    <div
+                                        className="mt-6 cursor-pointer"
+                                        key={entidad.id}
+                                        onClick={() => openModal(entidad)}
+                                    >
                                         <div className="p-6">
                                             <h2 className="text-2xl font-bold">
                                                 {entidad.nombre}
@@ -85,7 +101,7 @@ const Home = () => {
                         breakLabel={"..."}
                         breakClassName={"break-me"}
                         pageCount={Math.ceil(
-                            entidadesFiltradas.length / entidadesPerPage,
+                            entidadesFiltradas.length / entidadesPerPage
                         )}
                         marginPagesDisplayed={2}
                         pageRangeDisplayed={5}
@@ -99,6 +115,11 @@ const Home = () => {
                         nextLinkClassName={"text-gray-500 text-sm ml-2"}
                         pageLinkClassName={"text-gray-500 text-sm"}
                     />
+
+                    {/* Renderizar el modal si showModal es true */}
+                    {showModal && modalEntidad && (
+                        <Modal entidad={modalEntidad} onClose={closeModal} />
+                    )}
                 </div>
             </div>
         </div>
