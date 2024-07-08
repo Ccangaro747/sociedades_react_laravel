@@ -1,74 +1,128 @@
-import React, { useEffect, useState } from 'react'
-import axios from 'axios';
-import { useNavigate, Link } from 'react-router-dom'; // Importa Link
-import AuthUser from './AuthUser';
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import { useNavigate, Link } from "react-router-dom";
+import AuthUser from "./AuthUser";
 
 const Register = () => {
-    const { getToken } = AuthUser()
+    const { getToken } = AuthUser();
     const [name, setName] = useState("");
     const [password, setPassword] = useState("");
     const [email, setEmail] = useState("");
-    const navigate = useNavigate()
+    const [message, setMessage] = useState("");
+    const navigate = useNavigate();
 
-    useEffect(()=>{
-        if(getToken()){
-          navigate("/")
+    useEffect(() => {
+        if (getToken()) {
+            navigate("/");
         }
-    },[])
+    }, []);
 
-    const submitRegistro = async(e) =>{
+    const submitRegistro = async (e) => {
         e.preventDefault();
 
-        // Primero, obtenemos la cookie CSRF
         await axios.get("/sanctum/csrf-cookie").then((response) => {
-            // Luego, hacemos la solicitud de registro
-            axios.post("/api/v1/auth/register", { name, email, password }, {
-                headers: {
-                    'X-Requested-With': 'XMLHttpRequest',
-                    'X-CSRF-TOKEN': response.data.csrfToken // Aquí enviamos el token CSRF
-                }
-            }).then((data) => {
-                if (data.data.success) {
-                    navigate("/login")
-                }
-            }).catch((error) => {
-                console.error('Error al registrarse:', error);
-            });
+            axios
+                .post(
+                    "/api/v1/auth/register",
+                    { name, email, password },
+                    {
+                        headers: {
+                            "X-Requested-With": "XMLHttpRequest",
+                            "X-CSRF-TOKEN": response.data.csrfToken,
+                        },
+                    },
+                )
+                .then((data) => {
+                    if (data.data.success) {
+                        navigate("/login");
+                    } else {
+                        setMessage(
+                            "Error en el registro. Por favor, inténtelo de nuevo.",
+                        );
+                    }
+                })
+                .catch((error) => {
+                    console.error("Error al registrarse:", error);
+                    setMessage(
+                        "Error en el registro. Por favor, inténtelo de nuevo.",
+                    );
+                });
         });
-    }
+    };
 
     return (
-        <div className="flex items-center justify-center h-screen bg-gray-200">
-            <div className="p-6 bg-white rounded shadow-md w-80">
-                <h2 className="flex justify-center text-2xl font-bold text-center text-gray-600">Registro</h2>
-                <form>
+        <div className="flex items-center justify-center h-screen">
+            <div className="p-8 bg-white rounded-lg shadow-lg w-96">
+                <h2 className="mb-6 text-3xl font-bold text-center text-gray-800">
+                    Registro
+                </h2>
+                <form onSubmit={submitRegistro}>
                     <div className="mb-4">
                         <label className="block text-gray-700">Nombre</label>
-                        <input className="w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline" type="text" placeholder="Nombre" value={name} onChange={(e)=>setName(e.target.value)} required/>
+                        <input
+                            className="w-full px-4 py-2 mt-2 text-gray-700 border rounded-lg focus:outline-none focus:bg-white focus:border-green-400"
+                            type="text"
+                            placeholder="Nombre"
+                            value={name}
+                            onChange={(e) => setName(e.target.value)}
+                            required
+                        />
                     </div>
                     <div className="mb-4">
                         <label className="block text-gray-700">Email</label>
-                        <input className="w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline" type="email" placeholder="Email" value={email} onChange={(e)=>setEmail(e.target.value)} required />
+                        <input
+                            className="w-full px-4 py-2 mt-2 text-gray-700 border rounded-lg focus:outline-none focus:bg-white focus:border-green-400"
+                            type="email"
+                            placeholder="Email"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            required
+                        />
                     </div>
                     <div className="mb-6">
                         <label className="block text-gray-700">Password</label>
-                        <input className="w-full px-3 py-2 mb-3 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline" type="password" placeholder="******" value={password} onChange={(e)=>setPassword(e.target.value)} required />
+                        <input
+                            className="w-full px-4 py-2 mt-2 text-gray-700 border rounded-lg focus:outline-none focus:bg-white focus:border-green-400"
+                            type="password"
+                            placeholder="******"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            required
+                        />
                     </div>
                     <div className="mb-6">
-                        <button className="w-full px-4 py-2 font-bold text-white bg-green-500 rounded hover:bg-green-700 focus:outline-none focus:shadow-outline" type="button" onClick={submitRegistro}>
+                        <button
+                            className="w-full px-4 py-2 font-bold text-white bg-green-500 rounded-lg hover:bg-green-600 focus:outline-none focus:shadow-outline"
+                            type="submit"
+                        >
                             Enviar
                         </button>
+                        <p className="mt-4 text-center text-red-600">
+                            {message}
+                        </p>
                     </div>
                     <div className="text-xs text-center">
-                        Al registrarte, aceptas nuestros <a href="/terminos-y-condiciones" className="text-blue-500 underline">Términos y Condiciones</a>.
+                        Al registrarte, aceptas nuestros{" "}
+                        <Link
+                            to="/terminos-y-condiciones"
+                            className="text-blue-500 underline"
+                        >
+                            Términos y Condiciones
+                        </Link>
+                        .
                     </div>
                     <div className="mt-4 text-xs text-center">
-                        <Link to="/forgot-password" className="text-blue-500 underline">Olvidé mi contraseña</Link> {/* Enlace a la página de recuperación */}
+                        <Link
+                            to="/forgot-password"
+                            className="text-blue-500 underline"
+                        >
+                            Olvidé mi contraseña
+                        </Link>
                     </div>
                 </form>
             </div>
         </div>
-    )
-}
+    );
+};
 
-export default Register
+export default Register;
