@@ -1,11 +1,11 @@
 import React from "react";
 import noFotoImage from "../../../public/nofoto.png";
+import "../components/Modal.css";
 
 const Modal = ({ entidad, onClose }) => {
     return (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-            <div className="relative w-full max-w-3xl max-h-screen overflow-y-auto bg-white rounded-lg shadow-lg">
-                {/* Botón de cierre */}
+        <div className="fixed inset-0 flex items-center justify-center">
+            <div className="relative w-full max-w-3xl max-h-screen mt-5 mb-5 overflow-y-auto bg-white rounded-lg shadow-lg modal-scrollbar">
                 <button
                     className="absolute text-gray-500 top-2 right-2 hover:text-gray-700"
                     onClick={onClose}
@@ -14,15 +14,14 @@ const Modal = ({ entidad, onClose }) => {
                 </button>
                 <div className="p-6">
                     <div className="flex flex-col items-center">
-                        {/* Imagen */}
                         <div className="w-48 h-48 mb-4 overflow-hidden rounded-full">
                             <img
-                                src={entidad.urlfoto || noFotoImage} //Utilziando noFotoImage si entidad.urlfoto está vacío
+                                src={entidad.urlfoto || noFotoImage}
                                 alt={entidad.nombre}
                                 className="object-cover w-full h-full"
                                 onError={(e) => {
                                     e.target.src = noFotoImage;
-                                }} // Mostrando noFotoImage si hay un error al cargar la imagen
+                                }}
                             />
                         </div>
                         <h2 className="mb-4 text-2xl font-bold">
