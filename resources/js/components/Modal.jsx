@@ -44,4 +44,4 @@ const Modal = ({ entidad, onClose }) => {
     );
 };
 
-export default Modal; // Asegúrate de exportar el componente Modal así
+export default Modal;
