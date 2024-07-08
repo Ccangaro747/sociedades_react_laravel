@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 class FrontController extends Controller
 {
     public function entidades (Request $request){
-        $data = Entidad::orderByDesc("created_at")->take($request->quantity)->get(["id", "nombre", "descripcion"]);
+        $data = Entidad::orderByDesc("created_at")->take($request->quantity)->get();
         return response()->json($data, 200);
     }
 }
