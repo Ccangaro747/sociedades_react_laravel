@@ -1,42 +1,99 @@
-// Modal.jsx
-import React from 'react';
+import React from "react";
+import noFotoImage from "../../../public/nofoto.png";
 
 const Modal = ({ entidad, onClose }) => {
     return (
-        <div className="fixed inset-0 z-50 flex items-center justify-center overflow-x-hidden overflow-y-auto outline-none focus:outline-none">
-            <div className="relative w-auto max-w-3xl mx-auto my-6">
-                {/* Contenido del modal */}
-                <div className="relative flex flex-col w-full p-8 bg-white rounded-lg shadow-lg">
-                    <button
-                        className="absolute top-0 right-0 mt-4 mr-4 text-gray-500 hover:text-gray-700"
-                        onClick={onClose}
-                    >
-                        <svg
-                            className="w-6 h-6 fill-current"
-                            xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 24 24"
-                        >
-                            <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z" />
-                        </svg>
-                    </button>
-                    <div className="text-center">
-                        <h2 className="text-2xl font-bold">{entidad.nombre}</h2>
-                        {entidad.urlfoto && (
-                            <div className="my-4">
-                                <img
-                                    src={entidad.urlfoto}
-                                    alt={entidad.nombre}
-                                    className="rounded-lg shadow-md"
-                                    style={{ maxWidth: "100%", maxHeight: "300px" }}
-                                />
-                            </div>
-                        )}
-                        <p className="mt-2">{entidad.email}</p>
-                        <p className="mt-2">{entidad.descripcion}</p>
-                        <p className="mt-2">{entidad.telefono}</p>
-                        <p className="mt-2">{entidad.direccion}</p>
-                        <p className="mt-2">{entidad.website}</p>
-                        <p className="mt-2">{entidad.facebook}</p>
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+            <div className="relative w-full max-w-3xl max-h-screen overflow-y-auto bg-white rounded-lg shadow-lg">
+                {/* Botón de cierre */}
+                <button
+                    className="absolute text-gray-500 top-2 right-2 hover:text-gray-700"
+                    onClick={onClose}
+                >
+                    &times;
+                </button>
+                <div className="p-6">
+                    <div className="flex flex-col items-center">
+                        {/* Imagen */}
+                        <div className="w-48 h-48 mb-4 overflow-hidden rounded-full">
+                            <img
+                                src={entidad.urlfoto || noFotoImage} //Utilziando noFotoImage si entidad.urlfoto está vacío
+                                alt={entidad.nombre}
+                                className="object-cover w-full h-full"
+                                onError={(e) => {
+                                    e.target.src = noFotoImage;
+                                }} // Mostrando noFotoImage si hay un error al cargar la imagen
+                            />
+                        </div>
+                        <h2 className="mb-4 text-2xl font-bold">
+                            {entidad.nombre}
+                        </h2>
+                        <div className="w-full">
+                            <label className="block mb-2 text-sm font-bold text-gray-700">
+                                Email:
+                            </label>
+                            <input
+                                type="text"
+                                value={entidad.email}
+                                readOnly
+                                className="w-full px-3 py-2 border rounded shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            />
+                        </div>
+                        <div className="w-full">
+                            <label className="block mb-2 text-sm font-bold text-gray-700">
+                                Descripción:
+                            </label>
+                            <input
+                                type="text"
+                                value={entidad.descripcion}
+                                readOnly
+                                className="w-full px-3 py-2 border rounded shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            />
+                        </div>
+                        <div className="w-full">
+                            <label className="block mb-2 text-sm font-bold text-gray-700">
+                                Teléfono:
+                            </label>
+                            <input
+                                type="text"
+                                value={entidad.telefono}
+                                readOnly
+                                className="w-full px-3 py-2 border rounded shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            />
+                        </div>
+                        <div className="w-full">
+                            <label className="block mb-2 text-sm font-bold text-gray-700">
+                                Dirección:
+                            </label>
+                            <input
+                                type="text"
+                                value={entidad.direccion}
+                                readOnly
+                                className="w-full px-3 py-2 border rounded shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            />
+                        </div>
+                        <div className="w-full">
+                            <label className="block mb-2 text-sm font-bold text-gray-700">
+                                Website:
+                            </label>
+                            <input
+                                type="text"
+                                value={entidad.website}
+                                readOnly
+                                className="w-full px-3 py-2 border rounded shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            />
+                        </div>
+                        <div className="w-full">
+                            <label className="block mb-2 text-sm font-bold text-gray-700">
+                                Facebook:
+                            </label>
+                            <input
+                                type="text"
+                                value={entidad.facebook}
+                                readOnly
+                                className="w-full px-3 py-2 border rounded shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            />
+                        </div>
                     </div>
                 </div>
             </div>
