@@ -36,4 +36,6 @@ export default{
     // Public
     getEntidades:(data)=>axios.get(`${base_api_url}/public/entidades/${data}`), //Se crea en el Home.jsx, se podría eliminar o dejar de referencia
     CategoriaAll:()=>axios.get(`${base_api_url}/public/categorias`),
+    CategoriaBySlug: (slug) => axios.get(`${base_api_url}/public/categorias/${slug}`)
+
 }

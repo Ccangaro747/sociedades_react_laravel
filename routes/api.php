@@ -18,7 +18,7 @@ Route::prefix('v1')->group(function () {
 
     Route::get('/public/entidades/{quantity}', [FrontController::class, 'entidades']);
     Route::get('/public/categorias', [FrontController::class, 'categorias']);
-    //Route::get('/public/{slug}', [FrontController::class, 'categoria']); // Esta ruta se utiliza para mostrar una categoría específica en la parte pública de la aplicación. El parámetro 'slug' se utiliza para identificar de manera única la categoría que se va a mostrar. El controlador 'FrontController' y su método 'categoria' se encargan de procesar la solicitud.
+    Route::get('/public/categorias/{slug}', [FrontController::class, 'categoria']);
 
 
     //::AUTH
