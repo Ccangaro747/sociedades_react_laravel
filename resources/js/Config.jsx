@@ -34,5 +34,5 @@ export default{
 
 
     // Public
-    getEntidades:(data)=>axios.get(`${base_api_url}/public/entidades/${data}`),
+    getEntidades:(data)=>axios.get(`${base_api_url}/public/entidades/${data}`), //Se crea en el Home.jsx, se podría eliminar o dejar de referencia
 }

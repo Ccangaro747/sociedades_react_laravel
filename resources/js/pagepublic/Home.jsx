@@ -3,6 +3,7 @@ import Config from "../Config";
 import ReactPaginate from "react-paginate";
 import { BeatLoader } from "react-spinners";
 import Modal from "../components/Modal";
+import PropTypes from 'prop-types';
 
 const Home = () => {
     const [entidades, setEntidades] = useState([]);
@@ -10,6 +11,7 @@ const Home = () => {
     const [currentPage, setCurrentPage] = useState(0);
     const [showModal, setShowModal] = useState(false);
     const [modalEntidad, setModalEntidad] = useState(null);
+    const [loading, setLoading] = useState(true);
     const entidadesPerPage = 5;
 
     useEffect(() => {
@@ -22,6 +24,8 @@ const Home = () => {
             setEntidades(response.data);
         } catch (error) {
             console.error("Error al obtener las entidades:", error);
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -30,12 +34,12 @@ const Home = () => {
     };
 
     const entidadesFiltradas = entidades.filter((entidad) =>
-        entidad.nombre.toLowerCase().includes(busqueda.toLowerCase())
+        entidad.nombre.toLowerCase().includes(busqueda.toLowerCase()),
     );
 
     const currentEntidades = entidadesFiltradas.slice(
         currentPage * entidadesPerPage,
-        (currentPage + 1) * entidadesPerPage
+        (currentPage + 1) * entidadesPerPage,
     );
 
     const openModal = (entidad) => {
@@ -67,13 +71,17 @@ const Home = () => {
                     {/* Tarjetas de entidades */}
                     <div className="mt-5 bg-white rounded-lg shadow-md">
                         <div className="p-6">
-                            {!currentEntidades.length ? (
+                            {loading ? (
                                 <div className="flex justify-center">
                                     <BeatLoader
                                         color="#32CD32"
                                         loading={true}
                                         size={15}
                                     />
+                                </div>
+                            ) : !currentEntidades.length ? (
+                                <div className="flex justify-center">
+                                    <p>No se encontraron entidades.</p>
                                 </div>
                             ) : (
                                 currentEntidades.map((entidad) => (
@@ -101,7 +109,7 @@ const Home = () => {
                         breakLabel={"..."}
                         breakClassName={"break-me"}
                         pageCount={Math.ceil(
-                            entidadesFiltradas.length / entidadesPerPage
+                            entidadesFiltradas.length / entidadesPerPage,
                         )}
                         marginPagesDisplayed={2}
                         pageRangeDisplayed={5}
@@ -124,6 +132,11 @@ const Home = () => {
             </div>
         </div>
     );
+};
+
+Home.propTypes = {
+    entidad: PropTypes.object,
+    onClose: PropTypes.func,
 };
 
 export default Home;
