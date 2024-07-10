@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Categoria;
 use App\Models\Entidad;
 use Illuminate\Http\Request;
 
@@ -28,6 +29,12 @@ class FrontController extends Controller
         });
 
         // Devolver las entidades en formato JSON con un código de estado 200 (OK)
+        return response()->json($data, 200);
+    }
+
+    public function categorias()
+    {
+        $data = Categoria::get();
         return response()->json($data, 200);
     }
 }
