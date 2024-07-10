@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
-import Config from '../Config';
-import Modal from '../components/Modal';
+import React, { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import Config from "../Config";
+import Modal from "../components/Modal";
 import { BeatLoader } from "react-spinners";
 
 const Categoria = () => {
@@ -38,6 +38,10 @@ const Categoria = () => {
         setDatamodal(entidad);
     };
 
+    const closeModal = () => {
+        setModal(false);
+    };
+
     return (
         <div className="container pt-20 pb-20 mx-auto">
             <div className="flex justify-center">
@@ -49,7 +53,11 @@ const Categoria = () => {
                         <div className="p-6">
                             {loading ? (
                                 <div className="flex justify-center">
-                                    <BeatLoader color="#32CD32" loading={true} size={15} />
+                                    <BeatLoader
+                                        color="#32CD32"
+                                        loading={true}
+                                        size={15}
+                                    />
                                 </div>
                             ) : !entidades.length ? (
                                 <div className="flex justify-center">
@@ -57,10 +65,18 @@ const Categoria = () => {
                                 </div>
                             ) : (
                                 entidades.map((entidad) => (
-                                    <div className="mt-6 cursor-pointer" key={entidad.id} onClick={(e) => showModal(e, entidad)}>
+                                    <div
+                                        className="mt-6 cursor-pointer"
+                                        key={entidad.id}
+                                        onClick={(e) => showModal(e, entidad)}
+                                    >
                                         <div className="p-6">
-                                            <h2 className="text-2xl font-bold">{entidad.nombre}</h2>
-                                            <p className="mt-2">{entidad.descripcion}</p>
+                                            <h2 className="text-2xl font-bold">
+                                                {entidad.nombre}
+                                            </h2>
+                                            <p className="mt-2">
+                                                {entidad.descripcion}
+                                            </p>
                                         </div>
                                     </div>
                                 ))
@@ -68,7 +84,7 @@ const Categoria = () => {
                         </div>
                     </div>
                     {modal && datamodal && (
-                        <Modal datamodal={datamodal} close={setModal} />
+                        <Modal entidad={datamodal} onClose={closeModal} />
                     )}
                 </div>
             </div>
