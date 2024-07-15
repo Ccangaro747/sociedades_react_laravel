@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const ForgotPassword = () => {
     const [email, setEmail] = useState("");
@@ -13,18 +13,25 @@ const ForgotPassword = () => {
 
         try {
             await axios.post("/api/v1/auth/forgot-password", { email });
-            setMessage("Hemos enviado un enlace de restablecimiento de contraseña a tu correo electrónico.");
+            setMessage(
+                "Hemos enviado un enlace de restablecimiento de contraseña a tu correo electrónico.",
+            );
             setError("");
         } catch (error) {
-            setError("Error al enviar el enlace de restablecimiento de contraseña. Por favor, verifica tu correo electrónico e inténtalo de nuevo.");
+            setError(
+                "Error al enviar el enlace de restablecimiento de contraseña. Por favor, verifica tu correo electrónico e inténtalo de nuevo.",
+            );
             setMessage("");
         }
-    }
+    };
 
     return (
         <div className="flex items-center justify-center h-screen ">
             <div className="p-8 bg-white rounded-lg shadow-lg w-96">
-                <h2 className="mb-6 text-3xl font-bold text-center text-gray-800">
+                <h2
+                    className="mb-6 text-3xl font-bold text-center text-gray-800"
+                    style={{ color: "#777372" }}
+                >
                     Olvidé mi contraseña
                 </h2>
                 <form onSubmit={submitForgotPassword}>
@@ -48,11 +55,15 @@ const ForgotPassword = () => {
                         </button>
                     </div>
                 </form>
-                {message && <p className="mt-4 text-center text-green-500">{message}</p>}
-                {error && <p className="mt-4 text-center text-red-500">{error}</p>}
+                {message && (
+                    <p className="mt-4 text-center text-green-500">{message}</p>
+                )}
+                {error && (
+                    <p className="mt-4 text-center text-red-500">{error}</p>
+                )}
             </div>
         </div>
     );
-}
+};
 
 export default ForgotPassword;
